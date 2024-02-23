@@ -48,11 +48,15 @@ class MyGame extends FlameGame {
   void loadBackground() async {
     final parallaxBackground = await loadParallaxComponent(
       [
-        ParallaxImageData('dark_blue.png'),
-        ParallaxImageData('shadow_2.png'),
-        ParallaxImageData('shadow_1.png'),
+        ParallaxImageData('blue.png'),
+        ParallaxImageData('shadow_stones.png'),
+        ParallaxImageData('fish.png'),
+        ParallaxImageData('corals.png'),
+        ParallaxImageData('stones.png'),
+        ParallaxImageData('bubbles.png'),
+        ParallaxImageData('rays.png'),
       ],
-      baseVelocity: Vector2(0, -20),
+      baseVelocity: Vector2(0, -10),
       velocityMultiplierDelta: Vector2(0, 1.8),
       repeat: ImageRepeat.repeatY,
       fill: LayerFill.width,
