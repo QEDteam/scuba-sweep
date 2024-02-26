@@ -7,6 +7,7 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_flutter_app/data/providers/score_provider.dart';
+import 'package:my_flutter_app/game/components/booster_manager.dart';
 import 'package:my_flutter_app/game/components/enemy_component.dart';
 import 'package:my_flutter_app/game/components/falling_component.dart';
 import 'package:my_flutter_app/game/components/player_component.dart';
@@ -30,6 +31,7 @@ class MyGame extends FlameGame {
   final List<FallingComponent> fallingComponents = [];
   final List<EnemyComponent> enemyComponents = [];
   late final ScoreComponent scoreComponent = ScoreComponent(context);
+  final BoosterManager boosterManager = BoosterManager();
 
   late final Vector2 gameSize;
   Timer fallingComponentsTimer = Timer(Duration.zero, () {});
@@ -91,6 +93,8 @@ class MyGame extends FlameGame {
     add(scoreComponent);
     player.startMovingUp();
     startAddingEnemies();
+    add(boosterManager);
+    boosterManager.start();
   }
 
   void _startAddingFallingComponents() async {

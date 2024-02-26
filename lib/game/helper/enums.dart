@@ -51,7 +51,7 @@ enum SpeedMode {
   fast(speed: 300),
   superFast(speed: 400),
   turbo(speed: 500),
-
+  boost(speed: 700),
   ;
 
   final double speed;

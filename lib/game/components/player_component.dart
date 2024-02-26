@@ -1,17 +1,19 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
+import 'package:my_flutter_app/game/game/my_game.dart';
 
 enum Direction { right, left, none }
 
 class PlayerComponent extends SpriteAnimationComponent
-    with DragCallbacks, HasGameRef {
-
+    with DragCallbacks, HasGameRef<MyGame>{
   final double _animationSpeed = 0.05; //old: 0.2
 
   late final SpriteAnimation _initialAnimation;
   late final SpriteAnimation _goLeftAnimation;
   late final SpriteAnimation _goRightAnimation;
+
+  bool hasShield = false;
 
   Direction direction = Direction.none;
   bool _isDragged = false;
@@ -49,6 +51,7 @@ class PlayerComponent extends SpriteAnimationComponent
     if (_isDragged) {
       final delta = event.localDelta.x;
       position.x += delta;
+      gameRef.boosterManager.shieldAnimation?.position = position;
 
       if (delta > 1) {
         direction = Direction.right;
@@ -108,7 +111,10 @@ class PlayerComponent extends SpriteAnimationComponent
       to: 8,
     );
 
+    _loadShieldAnimation();
   }
 
-
+  Future<void> _loadShieldAnimation() async {
+    
+  }
 }

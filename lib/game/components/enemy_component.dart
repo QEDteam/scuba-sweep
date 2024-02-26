@@ -38,7 +38,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
     final playerRect = gameRef.player.toRect();
     final enemyRect = toRect().inflate(bufferZone);
 
-    if (playerRect.overlaps(enemyRect)) {
+    if (!gameRef.player.hasShield && playerRect.overlaps(enemyRect)) {
       gameRef.sharkAttack(id);
     }
   }
