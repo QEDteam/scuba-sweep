@@ -56,7 +56,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   setSize() {
     switch (enemy) {
       case Enemy.shark:
-        size = Vector2.all(250);
+        size = Vector2(280,130);
         break;
       case Enemy.jellyfish:
         size = Vector2.all(200);
@@ -77,7 +77,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
       bool moveRight = positionX < (gameRef.size.x / 2);
       position.x += moveRight ? 2 : -2;
       if (!moveRight) {
-        sprite = await Sprite.load('shark_left.png');
+        sprite = await Sprite.load('sharkl.png');
       }
     }
   }

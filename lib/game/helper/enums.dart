@@ -67,11 +67,32 @@ enum Enemy {
   String get imagePath {
     switch (this) {
       case Enemy.shark:
-        return 'shark.png';
+        return 'shark_r.png';
       case Enemy.jellyfish:
         return 'jelly.png';
       case Enemy.pufferfish:
-        return 'pufferfish.png';
+        return 'puffer_fish.png';
+    }
+  }
+}
+
+enum PlasticType {
+  bottle,
+  glass,
+  bag,
+  straw,
+  ;
+
+  String get imagePath {
+    switch (this) {
+      case PlasticType.bottle:
+        return 'bottle.png';
+      case PlasticType.glass:
+        return 'bottle_1.png';
+      case PlasticType.bag:
+        return 'plastic_bag.png';
+      case PlasticType.straw:
+        return 'straw.png';
     }
   }
 }

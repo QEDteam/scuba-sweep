@@ -94,11 +94,15 @@ class MyGame extends FlameGame {
   }
 
   void _startAddingFallingComponents() async {
-    final sprite = await cp.Sprite.load('bottle.png');
-    fallingComponentsTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+    final List<Future<cp.Sprite>> plasticSprites = PlasticType.values.map((e) {
+      final sprite = cp.Sprite.load(e.imagePath);
+      return sprite;
+    }).toList();
+    fallingComponentsTimer = Timer.periodic(const Duration(milliseconds: 800), (_) async {
+      final randomPlastic = Random().nextInt(PlasticType.values.length);
       final fallingComponent = FallingComponent(
         id: uuid.v4(),
-        sprite: sprite,
+        sprite: await plasticSprites[randomPlastic],
         positionX: randomPositionX,
       );
       add(fallingComponent);
@@ -112,7 +116,7 @@ class MyGame extends FlameGame {
       return sprite;
     }).toList();
     enemyComponentsTimer =
-        Timer.periodic(const Duration(seconds: 2), (_) async {
+        Timer.periodic(const Duration(seconds: 3), (_) async {
       final randomEnemy = Random().nextInt(level);
       final enemyComponent = EnemyComponent(
         enemy: Enemy.values[randomEnemy],
