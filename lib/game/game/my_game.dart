@@ -3,10 +3,10 @@ import 'dart:math';
 
 import 'package:flame/components.dart' as cp;
 import 'package:flame/game.dart';
-import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_flutter_app/data/providers/score_provider.dart';
+import 'package:my_flutter_app/game/components/background_component.dart';
 import 'package:my_flutter_app/game/components/booster_manager.dart';
 import 'package:my_flutter_app/game/components/enemy_manager.dart';
 import 'package:my_flutter_app/game/components/player_component.dart';
@@ -40,26 +40,7 @@ class MyGame extends FlameGame {
   Future<void> onLoad() async {
     super.onLoad();
     gameSize = size;
-    loadBackground();
-  }
-
-  void loadBackground() async {
-    final parallaxBackground = await loadParallaxComponent(
-      [
-        ParallaxImageData('blue.png'),
-        ParallaxImageData('shadow_stones.png'),
-        ParallaxImageData('fish.png'),
-        ParallaxImageData('corals.png'),
-        ParallaxImageData('stones.png'),
-        ParallaxImageData('bubbles.png'),
-        ParallaxImageData('rays.png'),
-      ],
-      baseVelocity: Vector2(0, -10),
-      velocityMultiplierDelta: Vector2(0, 1.8),
-      repeat: ImageRepeat.repeatY,
-      fill: LayerFill.width,
-    );
-    add(parallaxBackground);
+    add(MyParallaxComponent());
   }
 
   @override
