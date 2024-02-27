@@ -32,5 +32,4 @@ class BoosterManager extends Component with HasGameRef<MyGame> {
     _boosters.add(booster);
     gameRef.add(booster);
   }
-
 }

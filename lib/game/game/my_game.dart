@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_flutter_app/data/providers/score_provider.dart';
 import 'package:my_flutter_app/game/components/booster_manager.dart';
-import 'package:my_flutter_app/game/components/enemy_component.dart';
+import 'package:my_flutter_app/game/components/enemy_manager.dart';
 import 'package:my_flutter_app/game/components/player_component.dart';
 import 'package:my_flutter_app/game/components/score_component.dart';
 import 'package:my_flutter_app/game/components/trash_manager.dart';
@@ -16,7 +16,6 @@ import 'package:my_flutter_app/game/game/widgets/game_header.dart';
 import 'package:my_flutter_app/game/game/widgets/game_over_menu.dart';
 import 'package:my_flutter_app/game/game/widgets/pause_menu.dart';
 import 'package:my_flutter_app/game/helper/enums.dart';
-import 'package:uuid/uuid.dart';
 
 class MyGame extends FlameGame {
   final BuildContext context;
@@ -28,14 +27,12 @@ class MyGame extends FlameGame {
 
   final PlayerComponent player = PlayerComponent();
 
-  final List<EnemyComponent> enemyComponents = [];
   late final ScoreComponent scoreComponent = ScoreComponent(context);
   final BoosterManager boosterManager = BoosterManager();
   final TrashManager trashManager = TrashManager();
+  final EnemyManager enemyManager = EnemyManager();
 
   late final Vector2 gameSize;
-  Timer enemyComponentsTimer = Timer(Duration.zero, () {});
-  var uuid = const Uuid();
 
   int level = 1;
 
@@ -72,7 +69,7 @@ class MyGame extends FlameGame {
     overlays.add(PauseMenu.id);
     boosterManager.timer.cancel();
     trashManager.timer.cancel();
-    enemyComponentsTimer.cancel();
+    enemyManager.timer.cancel();
   }
 
   @override
@@ -81,7 +78,8 @@ class MyGame extends FlameGame {
     overlays.remove(PauseMenu.id);
     overlays.add(GameHeader.id);
     boosterManager.start();
-    startAddingEnemies();
+    trashManager.start();
+    enemyManager.start();
   }
 
   void startGame() async {
@@ -91,30 +89,12 @@ class MyGame extends FlameGame {
     overlays.add(GameHeader.id);
     add(scoreComponent);
     player.startMovingUp();
-    startAddingEnemies();
+    add(enemyManager);
+    enemyManager.start();
     add(trashManager);
     trashManager.start();
     add(boosterManager);
     boosterManager.start();
-  }
-
-  void startAddingEnemies() {
-    final List<Future<cp.Sprite>> enemySprites = Enemy.values.map((e) {
-      final sprite = cp.Sprite.load(e.imagePath);
-      return sprite;
-    }).toList();
-    enemyComponentsTimer =
-        Timer.periodic(const Duration(seconds: 3), (_) async {
-      final randomEnemy = Random().nextInt(level);
-      final enemyComponent = EnemyComponent(
-        enemy: Enemy.values[randomEnemy],
-        positionX: randomPositionX,
-        id: uuid.v4(),
-        sprite: await enemySprites[randomEnemy],
-      );
-      add(enemyComponent);
-      enemyComponents.add(enemyComponent);
-    });
   }
 
   levelUp() {
@@ -134,12 +114,12 @@ class MyGame extends FlameGame {
   }
 
   void sharkAttack(String componentId) {
-    final index =
-        enemyComponents.indexWhere((element) => element.id == componentId);
+    final enemies = enemyManager.enemyComponents;
+    final index = enemies.indexWhere((element) => element.id == componentId);
     if (index != -1) {
       addEffect(
           effect: AnimationEffect.burst,
-          position: enemyComponents[index].position,
+          position: enemies[index].position,
           size: Vector2.all(192));
 
       gameOver();
@@ -152,10 +132,7 @@ class MyGame extends FlameGame {
     overlays.add(GameOverMenu.id);
     trashManager.reset();
     boosterManager.timer.cancel();
-    enemyComponentsTimer.cancel();
-    for (var enemyComponent in enemyComponents) {
-      enemyComponent.removeFromParent();
-    }
+    enemyManager.reset();
     gameSpeed = SpeedMode.slow;
   }
 
