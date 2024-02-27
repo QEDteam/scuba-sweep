@@ -9,9 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_flutter_app/data/providers/score_provider.dart';
 import 'package:my_flutter_app/game/components/booster_manager.dart';
 import 'package:my_flutter_app/game/components/enemy_component.dart';
-import 'package:my_flutter_app/game/components/falling_component.dart';
 import 'package:my_flutter_app/game/components/player_component.dart';
 import 'package:my_flutter_app/game/components/score_component.dart';
+import 'package:my_flutter_app/game/components/trash_manager.dart';
 import 'package:my_flutter_app/game/game/widgets/game_header.dart';
 import 'package:my_flutter_app/game/game/widgets/game_over_menu.dart';
 import 'package:my_flutter_app/game/game/widgets/pause_menu.dart';
@@ -28,13 +28,12 @@ class MyGame extends FlameGame {
 
   final PlayerComponent player = PlayerComponent();
 
-  final List<FallingComponent> fallingComponents = [];
   final List<EnemyComponent> enemyComponents = [];
   late final ScoreComponent scoreComponent = ScoreComponent(context);
   final BoosterManager boosterManager = BoosterManager();
+  final TrashManager trashManager = TrashManager();
 
   late final Vector2 gameSize;
-  Timer fallingComponentsTimer = Timer(Duration.zero, () {});
   Timer enemyComponentsTimer = Timer(Duration.zero, () {});
   var uuid = const Uuid();
 
@@ -71,7 +70,8 @@ class MyGame extends FlameGame {
     super.pauseEngine();
     overlays.remove(GameHeader.id);
     overlays.add(PauseMenu.id);
-    fallingComponentsTimer.cancel();
+    boosterManager.timer.cancel();
+    trashManager.timer.cancel();
     enemyComponentsTimer.cancel();
   }
 
@@ -80,7 +80,7 @@ class MyGame extends FlameGame {
     super.resumeEngine();
     overlays.remove(PauseMenu.id);
     overlays.add(GameHeader.id);
-    _startAddingFallingComponents();
+    boosterManager.start();
     startAddingEnemies();
   }
 
@@ -89,29 +89,13 @@ class MyGame extends FlameGame {
     ref.read(scoreNotifierProvider.notifier).getHighScore();
     add(player);
     overlays.add(GameHeader.id);
-    _startAddingFallingComponents();
     add(scoreComponent);
     player.startMovingUp();
     startAddingEnemies();
+    add(trashManager);
+    trashManager.start();
     add(boosterManager);
     boosterManager.start();
-  }
-
-  void _startAddingFallingComponents() async {
-    final List<Future<cp.Sprite>> plasticSprites = PlasticType.values.map((e) {
-      final sprite = cp.Sprite.load(e.imagePath);
-      return sprite;
-    }).toList();
-    fallingComponentsTimer = Timer.periodic(const Duration(milliseconds: 800), (_) async {
-      final randomPlastic = Random().nextInt(PlasticType.values.length);
-      final fallingComponent = FallingComponent(
-        id: uuid.v4(),
-        sprite: await plasticSprites[randomPlastic],
-        positionX: randomPositionX,
-      );
-      add(fallingComponent);
-      fallingComponents.add(fallingComponent);
-    });
   }
 
   void startAddingEnemies() {
@@ -166,11 +150,9 @@ class MyGame extends FlameGame {
     ref.read(scoreNotifierProvider.notifier).loadScores(scoreComponent.score);
     overlays.remove(GameHeader.id);
     overlays.add(GameOverMenu.id);
-    fallingComponentsTimer.cancel();
+    trashManager.reset();
+    boosterManager.timer.cancel();
     enemyComponentsTimer.cancel();
-    for (var fallingComponent in fallingComponents) {
-      fallingComponent.removeFromParent();
-    }
     for (var enemyComponent in enemyComponents) {
       enemyComponent.removeFromParent();
     }
