@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:dart_openai/dart_openai.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -15,6 +17,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:my_flutter_app/utilities/theme.dart';
 
 void mainCommon(options) async {
+  await dotenv.load(fileName: ".env");
+  OpenAI.apiKey = dotenv.env['OPEN_AI_API_KEY']!;
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   await EasyLocalization.ensureInitialized();
