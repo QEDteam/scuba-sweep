@@ -1,14 +1,15 @@
-
 import 'package:flame/components.dart';
 import 'package:my_flutter_app/game/game/my_game.dart';
 import 'package:my_flutter_app/game/helper/enums.dart';
 
-class FallingComponent extends SpriteComponent with HasGameRef<MyGame> {
+class TrashComponent extends SpriteComponent with HasGameRef<MyGame> {
   final String id;
 
-  FallingComponent(
-      {required this.id, required Sprite sprite, required positionX})
-      : super(
+  TrashComponent({
+    required this.id,
+    required Sprite sprite,
+    required positionX,
+  }) : super(
           size: Vector2.all(60.0),
           position: Vector2(positionX, 0),
           sprite: sprite,
@@ -25,20 +26,17 @@ class FallingComponent extends SpriteComponent with HasGameRef<MyGame> {
   }
 
   void collectFallingComponent(String componentId) {
-    final fallingComponents = gameRef.fallingComponents;
+    final trashComponents = gameRef.trashManager.trashList;
     final index =
-        fallingComponents.indexWhere((element) => element.id == componentId);
+        trashComponents.indexWhere((element) => element.id == componentId);
     if (index != -1) {
       gameRef.addEffect(
         effect: AnimationEffect.punch,
-        position: fallingComponents[index].position,
+        position: trashComponents[index].position,
         size: Vector2.all(AnimationEffect.punch.size),
       );
-      gameRef.remove(fallingComponents[index]);
+      gameRef.remove(trashComponents[index]);
       gameRef.scoreComponent.incrementScore();
-      
     }
   }
-
-  
 }
