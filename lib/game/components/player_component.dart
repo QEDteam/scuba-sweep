@@ -7,7 +7,7 @@ enum Direction { right, left, none }
 class PlayerComponent extends SpriteAnimationComponent
     with DragCallbacks, HasGameRef {
 
-  final double _animationSpeed = 0.1; //old: 0.2
+  final double _animationSpeed = 0.05; //old: 0.2
 
   late final SpriteAnimation _initialAnimation;
   late final SpriteAnimation _goLeftAnimation;
@@ -86,46 +86,29 @@ class PlayerComponent extends SpriteAnimationComponent
 
   Future<void> _loadAnimations() async {
     final spriteSheet = SpriteSheet(
-      image: await gameRef.images.load('swimmer.png'),
+      image: await gameRef.images.load('svrle.png'),
       srcSize: Vector2(384, 384),
     );
 
     _initialAnimation = spriteSheet.createAnimation(
-      row: 1,
+      row: 2,
       stepTime: _animationSpeed,
-      to: 4,
+      to: 8,
     );
 
     _goLeftAnimation = spriteSheet.createAnimation(
-      row: 2,
+      row: 0,
       stepTime: _animationSpeed,
-      to: 4,
+      to: 8,
     );
 
     _goRightAnimation = spriteSheet.createAnimation(
-      row: 3,
+      row: 1,
       stepTime: _animationSpeed,
-      to: 4,
+      to: 8,
     );
 
-    //_loadBubblesAnimation();
   }
 
-  // Future<void> _loadBubblesAnimation() async {
-  //   const AnimationEffect effect = AnimationEffect.bubbles;
-  //   final bubblesAnimationComponent = SpriteAnimationComponent.fromFrameData(
-  //     await gameRef.images.load('${effect.effectName}.png'),
-  //     SpriteAnimationData.sequenced(
-  //       amount: effect.amount,
-  //       amountPerRow: 5,
-  //       textureSize: Vector2.all(384),
-  //       stepTime: effect.speed,
-  //       loop: true,
-  //     ),
-  //     size: size,
-  //     anchor: Anchor.center,
-  //     position: Vector2(0, 50),
-  //   );
-  //   add(bubblesAnimationComponent);
-  // }
+
 }
