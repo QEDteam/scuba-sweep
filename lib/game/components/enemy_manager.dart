@@ -30,7 +30,7 @@ class EnemyManager extends Component with HasGameRef<MyGame> {
   }
 
   addEnemy() async {
-    final randomEnemy = Random().nextInt(gameRef.level);
+    final randomEnemy = Random().nextInt(gameRef.level < Enemy.values.length ? gameRef.level : Enemy.values.length);
       final enemyComponent = EnemyComponent(
         enemy: Enemy.values[randomEnemy],
         positionX: gameRef.randomPositionX,

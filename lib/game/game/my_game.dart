@@ -81,20 +81,16 @@ class MyGame extends FlameGame {
   }
 
   levelUp() {
-    if (level + 1 <= Enemy.values.length) {
-      level++;
-    }
+    level++;
     updateSpeed();
   }
 
   double get randomPositionX => Random().nextInt(gameSize.x.toInt()).toDouble();
 
   void updateSpeed() {
-    const speedList = SpeedMode.values;
-    final index = speedList.indexOf(gameSpeed) + 1;
-    if (index < speedList.length) {
-      gameSpeed = speedList[index];
-    }
+    //parallaxComponent.baseVelocity = Vector2(0, -10 - (gameSpeed.index * 10).toDouble());
+    const speedValues = SpeedMode.values;
+    gameSpeed = level < speedValues.length ? speedValues[level - 1] : speedValues.last;
   }
 
   void sharkAttack(String componentId) {
@@ -105,7 +101,7 @@ class MyGame extends FlameGame {
           effect: AnimationEffect.burst,
           position: enemies[index].position,
           size: Vector2.all(192));
-          
+
       gameOver();
     }
   }
