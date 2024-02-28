@@ -10,26 +10,30 @@ class GameRepository {
   Future<void> saveHighScore(int score, String nickname) async {
     final userId = _auth.currentUser?.uid;
     if (userId != null) {
-      if (nickname.isNotEmpty) {
-        await _firestore.collection('highScores').doc(userId).set({
+      await _firestore.collection('highScores').doc(userId).set({
           'score': score,
           'nickname': nickname,
         });
-      } else {
-        await _firestore.collection('highScores').doc(userId).set({
-          'score': score,
-        });
-      }
     }
   }
 
-  Future<int?> getHighScore() async {
+  Future<void> saveNickname(String nickname) async {
     final userId = _auth.currentUser?.uid;
-    final isAnonymous = _auth.currentUser?.isAnonymous ?? true;
-    if (!isAnonymous && userId != null) {
+    if (userId != null) {
+      await _firestore
+          .collection('highScores')
+          .doc(userId)
+          .set({'nickname': nickname});
+    }
+  }
+
+  Future<ScoreInfo?> getHighScore() async {
+    final userId = _auth.currentUser?.uid;
+    if (userId != null) {
       final doc = await _firestore.collection('highScores').doc(userId).get();
       if (doc.exists) {
-        return doc.data()?['score'];
+        final score = ScoreInfo.fromJson(doc.data()!);
+        return score;
       }
     }
     return null;

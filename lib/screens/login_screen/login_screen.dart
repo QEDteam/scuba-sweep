@@ -18,7 +18,6 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-
   final TextEditingController nicknameController = TextEditingController();
 
   @override
@@ -87,28 +86,29 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       hintText: tr("Type your nickname here"),
                     ),
                     const SizedBox(height: 20),
-                    state.isLoading ? const CircularProgressIndicator(color: Colors.white,) : ElevatedButton(
-                    onPressed: state.isLoading
-                          ? null
-                          : () => {
-                                ref
+                    state.isLoading
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : ElevatedButton(
+                            onPressed: state.isLoading
+                                ? null
+                                : () => ref
                                     .read(signInProvider.notifier)
-                                    .signInAnonymously(),
-                                ref
-                                    .read(scoreNotifierProvider.notifier)
-                                    .setNickname(nicknameController.text),
-                              },
-                    child: const Padding(
-                      padding:  EdgeInsets.all(8.0),
-                      child: Text(
-                        'Dive in',
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                    
+                                    .signInAnonymously()
+                                    .then((value) => ref
+                                        .read(scoreNotifierProvider.notifier)
+                                        .setNickname(nicknameController.text)),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'Dive in',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ),
+                          ),
                   ]),
             ),
           ),

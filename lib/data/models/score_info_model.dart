@@ -7,10 +7,10 @@ class ScoreInfo {
   final String? nickname;
   final int score;
 
-  ScoreInfo(
+  ScoreInfo({
     this.nickname,
-    this.score,
-  );
+    this.score = 0,
+});
 
   factory ScoreInfo.fromJson(Map<String, dynamic> json) =>
       _$ScoreInfoFromJson(json);
