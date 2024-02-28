@@ -16,7 +16,7 @@ class ScoreState with _$ScoreState {
     @Default(0) int highScore,
     @Default([]) List<ScoreInfo> topHighScores,
     @Default(false) bool isLoading,
-    @Default('User') String nickname,
+    @Default('') String nickname,
   }) = _ScoreState;
 
   const ScoreState._();
