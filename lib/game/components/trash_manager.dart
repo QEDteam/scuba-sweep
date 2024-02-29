@@ -25,7 +25,7 @@ class TrashManager extends Component with HasGameRef<MyGame> {
   }
 
   start() {
-    timer = da.Timer.periodic(const Duration(seconds: 2), (_) => addTrash());
+    timer = da.Timer.periodic(const Duration(seconds: 1), (_) => addTrash());
   }
 
   void addTrash() async {

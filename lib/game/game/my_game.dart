@@ -29,24 +29,27 @@ class MyGame extends FlameGame {
   final PlayerComponent player = PlayerComponent();
 
   late final ScoreComponent scoreComponent = ScoreComponent(context);
+  late final MyParallaxComponent parallaxComponent = MyParallaxComponent();
+  late final BackgroundComponent backgroundComponent = BackgroundComponent()
+    ..size = size;
   final BoosterManager boosterManager = BoosterManager();
   final TrashManager trashManager = TrashManager();
   final EnemyManager enemyManager = EnemyManager();
 
   late final Vector2 gameSize;
 
-  int level = 1;
+  int level = 0;
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     gameSize = size;
-    add(MyParallaxComponent());
+    add(backgroundComponent);
+    add(parallaxComponent);
   }
 
-  @override
-  void pauseEngine() {
-    super.pauseEngine();
+  pauseGame() {
+    pauseEngine();
     overlays.remove(GameHeader.id);
     overlays.add(PauseMenu.id);
     boosterManager.timer.cancel();
@@ -54,9 +57,8 @@ class MyGame extends FlameGame {
     enemyManager.timer.cancel();
   }
 
-  @override
-  void resumeEngine() {
-    super.resumeEngine();
+  resumeGame() {
+    resumeEngine();
     overlays.remove(PauseMenu.id);
     overlays.add(GameHeader.id);
     boosterManager.start();
@@ -65,6 +67,7 @@ class MyGame extends FlameGame {
   }
 
   void startGame() async {
+    level = 1;
     scoreComponent.reset();
     ref.read(scoreNotifierProvider.notifier).getHighScore();
     add(player);
@@ -82,15 +85,18 @@ class MyGame extends FlameGame {
 
   levelUp() {
     level++;
-    updateSpeed();
+    if (!player.hasShield) {
+      updateSpeed();
+    }
   }
 
   double get randomPositionX => Random().nextInt(gameSize.x.toInt()).toDouble();
 
-  void updateSpeed() {
-    //parallaxComponent.baseVelocity = Vector2(0, -10 - (gameSpeed.index * 10).toDouble());
+  void updateSpeed() async {
     const speedValues = SpeedMode.values;
-    gameSpeed = level < speedValues.length ? speedValues[level - 1] : speedValues.last;
+    gameSpeed =
+        level < speedValues.length ? speedValues[level - 1] : speedValues.last;
+    await parallaxComponent.updateSpeed(gameSpeed);
   }
 
   void sharkAttack(String componentId) {
@@ -101,19 +107,26 @@ class MyGame extends FlameGame {
           effect: AnimationEffect.burst,
           position: enemies[index].position,
           size: Vector2.all(192));
-
       gameOver();
     }
   }
 
   void gameOver() async {
+    pauseEngine();
     ref.read(scoreNotifierProvider.notifier).loadScores(scoreComponent.score);
     overlays.remove(GameHeader.id);
     overlays.add(EnvMessageOverlay.id);
+    reset();
+  }
+
+  void reset() {
     trashManager.reset();
     boosterManager.timer.cancel();
     enemyManager.reset();
+    level = 0;
     gameSpeed = SpeedMode.slow;
+    parallaxComponent.reset();
+    remove(player);
   }
 
   Future<void> addEffect(

@@ -23,7 +23,7 @@ class BoosterManager extends Component with HasGameRef<MyGame> {
   }
 
   start() {
-    timer = da.Timer.periodic(const Duration(seconds: 7), (_) => addBooster());
+    timer = da.Timer.periodic(const Duration(seconds: 10), (_) => addBooster());
   }
 
   void addBooster() {

@@ -37,7 +37,7 @@ class PauseMenu extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      game.resumeEngine();
+                      game.resumeGame();
                     },
                     child: const Text(
                       'Resume',

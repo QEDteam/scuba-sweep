@@ -38,6 +38,7 @@ class BoosterComponent extends SpriteComponent with HasGameRef<MyGame> {
     gameRef.player.hasShield = true;
     gameRef.add(shieldAnimation);
     gameRef.gameSpeed = SpeedMode.boost;
+    gameRef.parallaxComponent.updateSpeed(SpeedMode.boost);
   }
 
   void _loadAnimation() async {
