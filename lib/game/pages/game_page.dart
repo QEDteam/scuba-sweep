@@ -3,6 +3,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_flutter_app/game/game/my_game.dart';
+import 'package:my_flutter_app/game/game/widgets/env_message_overlay.dart';
 import 'package:my_flutter_app/game/game/widgets/game_header.dart';
 import 'package:my_flutter_app/game/game/widgets/game_over_menu.dart';
 import 'package:my_flutter_app/game/game/widgets/main_menu.dart';
@@ -26,6 +27,7 @@ class GamePage extends ConsumerWidget {
         PauseMenu.id: (_, MyGame game) => PauseMenu(game),
         GameOverMenu.id: (_, MyGame game) => GameOverMenu(game),
         GameHeader.id: (_, MyGame game) => GameHeader(game),
+        EnvMessageOverlay.id: (_, MyGame game) => EnvMessageOverlay(game),
       },
       initialActiveOverlays: const [MainMenu.id],
     );

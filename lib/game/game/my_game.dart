@@ -5,6 +5,7 @@ import 'package:flame/components.dart' as cp;
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_flutter_app/data/providers/message_provider.dart';
 import 'package:my_flutter_app/data/providers/score_provider.dart';
 import 'package:my_flutter_app/game/components/background_component.dart';
 import 'package:my_flutter_app/game/components/booster_manager.dart';
@@ -12,8 +13,8 @@ import 'package:my_flutter_app/game/components/enemy_manager.dart';
 import 'package:my_flutter_app/game/components/player_component.dart';
 import 'package:my_flutter_app/game/components/score_component.dart';
 import 'package:my_flutter_app/game/components/trash_manager.dart';
+import 'package:my_flutter_app/game/game/widgets/env_message_overlay.dart';
 import 'package:my_flutter_app/game/game/widgets/game_header.dart';
-import 'package:my_flutter_app/game/game/widgets/game_over_menu.dart';
 import 'package:my_flutter_app/game/game/widgets/pause_menu.dart';
 import 'package:my_flutter_app/game/helper/enums.dart';
 
@@ -76,12 +77,14 @@ class MyGame extends FlameGame {
     trashManager.start();
     add(boosterManager);
     boosterManager.start();
+    ref.read(aiMessageNotifierProvider.notifier).getAiMessage();
   }
 
   levelUp() {
     if (level + 1 <= Enemy.values.length) {
       level++;
     }
+    updateSpeed();
   }
 
   double get randomPositionX => Random().nextInt(gameSize.x.toInt()).toDouble();
@@ -102,7 +105,7 @@ class MyGame extends FlameGame {
           effect: AnimationEffect.burst,
           position: enemies[index].position,
           size: Vector2.all(192));
-
+          
       gameOver();
     }
   }
@@ -110,7 +113,7 @@ class MyGame extends FlameGame {
   void gameOver() async {
     ref.read(scoreNotifierProvider.notifier).loadScores(scoreComponent.score);
     overlays.remove(GameHeader.id);
-    overlays.add(GameOverMenu.id);
+    overlays.add(EnvMessageOverlay.id);
     trashManager.reset();
     boosterManager.timer.cancel();
     enemyManager.reset();
