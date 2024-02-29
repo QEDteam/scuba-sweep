@@ -16,6 +16,7 @@ class ScoreState with _$ScoreState {
     @Default(0) int highScore,
     @Default([]) List<ScoreInfo> topHighScores,
     @Default(false) bool isLoading,
+    @Default('') String nickname,
   }) = _ScoreState;
 
   const ScoreState._();
@@ -31,6 +32,20 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
 
   ScoreNotifier(this._gameRepository, this.ref) : super(const ScoreState());
 
+  void setNickname(String nickname) {
+    state = state.copyWith(nickname: nickname);
+    saveNickname(nickname);
+  }
+
+  Future<void> saveNickname(String nickname) async {
+    try {
+      await _gameRepository.saveNickname(nickname);
+      state = state.copyWith(nickname: nickname);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
   Future<void> loadScores(int currentScore) async {
     state = state.copyWith(score: currentScore);
     if (currentScore > state.highScore) {
@@ -42,8 +57,15 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
   Future<void> getHighScore() async {
     state = state.copyWith(isLoading: true);
     try {
-      final highScore = await _gameRepository.getHighScore();
-      state = state.copyWith(highScore: highScore ?? 0, isLoading: false);
+      final ScoreInfo? highScore = await _gameRepository.getHighScore();
+      if (highScore != null) {
+        state = state.copyWith(highScore: highScore.score, nickname: highScore.nickname ?? 'user', isLoading: false);
+        return;
+      } else {
+        state = state.copyWith(highScore: 0, isLoading: false, nickname: '');
+        return;
+      }
+      
     } catch (e) {
       return Future.error(e);
     }
@@ -51,7 +73,7 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
 
   Future<void> saveHighScore(int score) async {
     try {
-      await _gameRepository.saveHighScore(score);
+      await _gameRepository.saveHighScore(score, state.nickname);
       state = state.copyWith(highScore: score, isLoading: false);
     } catch (e) {
       return Future.error(e);

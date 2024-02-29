@@ -20,6 +20,7 @@ mixin _$ScoreState {
   int get highScore => throw _privateConstructorUsedError;
   List<ScoreInfo> get topHighScores => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  String get nickname => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ScoreStateCopyWith<ScoreState> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $ScoreStateCopyWith<$Res> {
       {int score,
       int highScore,
       List<ScoreInfo> topHighScores,
-      bool isLoading});
+      bool isLoading,
+      String nickname});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$ScoreStateCopyWithImpl<$Res, $Val extends ScoreState>
     Object? highScore = null,
     Object? topHighScores = null,
     Object? isLoading = null,
+    Object? nickname = null,
   }) {
     return _then(_value.copyWith(
       score: null == score
@@ -74,6 +77,10 @@ class _$ScoreStateCopyWithImpl<$Res, $Val extends ScoreState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -90,7 +97,8 @@ abstract class _$$ScoreStateImplCopyWith<$Res>
       {int score,
       int highScore,
       List<ScoreInfo> topHighScores,
-      bool isLoading});
+      bool isLoading,
+      String nickname});
 }
 
 /// @nodoc
@@ -108,6 +116,7 @@ class __$$ScoreStateImplCopyWithImpl<$Res>
     Object? highScore = null,
     Object? topHighScores = null,
     Object? isLoading = null,
+    Object? nickname = null,
   }) {
     return _then(_$ScoreStateImpl(
       score: null == score
@@ -126,6 +135,10 @@ class __$$ScoreStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -137,7 +150,8 @@ class _$ScoreStateImpl extends _ScoreState {
       {this.score = 0,
       this.highScore = 0,
       final List<ScoreInfo> topHighScores = const [],
-      this.isLoading = false})
+      this.isLoading = false,
+      this.nickname = 'User'})
       : _topHighScores = topHighScores,
         super._();
 
@@ -159,10 +173,13 @@ class _$ScoreStateImpl extends _ScoreState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final String nickname;
 
   @override
   String toString() {
-    return 'ScoreState(score: $score, highScore: $highScore, topHighScores: $topHighScores, isLoading: $isLoading)';
+    return 'ScoreState(score: $score, highScore: $highScore, topHighScores: $topHighScores, isLoading: $isLoading, nickname: $nickname)';
   }
 
   @override
@@ -176,12 +193,14 @@ class _$ScoreStateImpl extends _ScoreState {
             const DeepCollectionEquality()
                 .equals(other._topHighScores, _topHighScores) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, score, highScore,
-      const DeepCollectionEquality().hash(_topHighScores), isLoading);
+      const DeepCollectionEquality().hash(_topHighScores), isLoading, nickname);
 
   @JsonKey(ignore: true)
   @override
@@ -195,7 +214,8 @@ abstract class _ScoreState extends ScoreState {
       {final int score,
       final int highScore,
       final List<ScoreInfo> topHighScores,
-      final bool isLoading}) = _$ScoreStateImpl;
+      final bool isLoading,
+      final String nickname}) = _$ScoreStateImpl;
   const _ScoreState._() : super._();
 
   @override
@@ -206,6 +226,8 @@ abstract class _ScoreState extends ScoreState {
   List<ScoreInfo> get topHighScores;
   @override
   bool get isLoading;
+  @override
+  String get nickname;
   @override
   @JsonKey(ignore: true)
   _$$ScoreStateImplCopyWith<_$ScoreStateImpl> get copyWith =>

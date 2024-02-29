@@ -31,7 +31,7 @@ class MainMenu extends ConsumerWidget {
                 spacing: 10,
                 children: [
                   const Text(
-                    'Aqua Quest',
+                    'SqubaSweep ',
                     style: TextStyle(
                       fontSize: 50,
                       color: Colors.white,
@@ -43,10 +43,13 @@ class MainMenu extends ConsumerWidget {
                       game.overlays.remove(MainMenu.id);
                       game.startGame();
                     },
-                    child: const Text(
-                      'Play',
-                      style: TextStyle(
-                        fontSize: 30,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Play',
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                   ),

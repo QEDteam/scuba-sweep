@@ -7,8 +7,8 @@ part of 'score_info_model.dart';
 // **************************************************************************
 
 ScoreInfo _$ScoreInfoFromJson(Map<String, dynamic> json) => ScoreInfo(
-      json['nickname'] as String?,
-      json['score'] as int,
+      nickname: json['nickname'] as String?,
+      score: json['score'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$ScoreInfoToJson(ScoreInfo instance) => <String, dynamic>{

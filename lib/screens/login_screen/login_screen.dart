@@ -6,9 +6,9 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_flutter_app/data/providers/auth_provider.dart';
+import 'package:my_flutter_app/data/providers/score_provider.dart';
 import 'package:my_flutter_app/flavor_banner.dart';
 import 'package:my_flutter_app/utilities/router.dart';
-import 'package:my_flutter_app/widgets/fp_button.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -18,10 +18,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
-  static const Key anonymousButtonKey = Key('anonymus');
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nicknameController = TextEditingController();
 
   @override
   void initState() {
@@ -47,78 +44,72 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     return FlavorBanner(
       child: Scaffold(
-        backgroundColor: Colors.indigo[800],
+        backgroundColor: Color.fromARGB(255, 22, 123, 238),
         body: Center(
             child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            color: Colors.black.withAlpha(100),
+            color: Colors.black.withAlpha(80),
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Aqua Quest',
-                    style: TextStyle(
-                      fontSize: 50,
-                      color: Colors.white,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      textAlign: TextAlign.center,
+                      'Welcome aboard!',
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  TextInputField(
-                    controller: emailController,
-                    hintText: tr("Email"),
-                  ),
-                  TextInputField(
-                    controller: passwordController,
-                    hintText: tr("Password"),
-                    obsecureText: true,
-                  ),
-                  state.isLoading
-                      ? const CircularProgressIndicator()
-                      : Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
-                              child: TextButton(
-                                onPressed: state.isLoading
-                                    ? null
-                                    : () => ref
-                                        .read(signInProvider.notifier)
-                                        .signInWithEmailAndPassword(
-                                          emailController.text,
-                                          passwordController.text,
-                                        ),
-                                child: const Text(
-                                  "Sign in",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
+                    const SizedBox(height: 20),
+                    const SizedBox(
+                      width: 300,
+                      child: Text(
+                        'Take on the challenge in Scuba Sweep to cleanse the ocean depths and protect marine life.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    TextInputField(
+                      controller: nicknameController,
+                      hintText: tr("Type your nickname here"),
+                    ),
+                    const SizedBox(height: 20),
+                    state.isLoading
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : ElevatedButton(
+                            onPressed: state.isLoading
+                                ? null
+                                : () => ref
+                                    .read(signInProvider.notifier)
+                                    .signInAnonymously()
+                                    .then((value) => ref
+                                        .read(scoreNotifierProvider.notifier)
+                                        .setNickname(nicknameController.text)),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'Dive in',
+                                style: TextStyle(
+                                  fontSize: 30,
                                 ),
                               ),
                             ),
-                            FpButton(
-                              key: anonymousButtonKey,
-                              title: tr("Skip Login"),
-                              onPressed: state.isLoading
-                                  ? null
-                                  : () => ref
-                                      .read(signInProvider.notifier)
-                                      .signInAnonymously(),
-                              isLoading: state.isLoading,
-                            ),
-                          ],
-                        )
-                  //const SocialLogin()
-                ],
-              ),
+                          ),
+                  ]),
             ),
           ),
         )), // This trailing comma makes auto-formatting nicer for build methods.
