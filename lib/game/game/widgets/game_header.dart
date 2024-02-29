@@ -17,7 +17,7 @@ class GameHeader extends StatelessWidget {
           child: IconButton(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             onPressed: () {
-              game.pauseEngine();
+              game.pauseGame();
             },
             icon: const Icon(
               Icons.pause,

@@ -31,7 +31,7 @@ class ScoreComponent extends PositionComponent with HasGameRef<MyGame>{
 
   void incrementScore() {
     score++;
-    if (score % 15 == 0) {
+    if (score % 10 == 0) {
       gameRef.levelUp();
     }
   }

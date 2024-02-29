@@ -4,7 +4,6 @@ import 'dart:core' ;
 import 'package:flame/components.dart';
 import 'package:my_flutter_app/game/components/booster_component.dart';
 import 'package:my_flutter_app/game/game/my_game.dart';
-import 'package:my_flutter_app/game/helper/enums.dart';
 
 class BoosterManager extends Component with HasGameRef<MyGame> {
   final List<BoosterComponent> _boosters = [];
@@ -17,14 +16,14 @@ class BoosterManager extends Component with HasGameRef<MyGame> {
     super.update(dt);
     try {
       if (shieldAnimation!.isRemoved) {
+        gameRef.updateSpeed();
         gameRef.player.hasShield = false;
-        gameRef.gameSpeed = SpeedMode.normal;
       }
     } catch (_) {}
   }
 
   start() {
-    timer = da.Timer.periodic(const Duration(seconds: 7), (_) => addBooster());
+    timer = da.Timer.periodic(const Duration(seconds: 10), (_) => addBooster());
   }
 
   void addBooster() {

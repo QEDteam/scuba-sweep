@@ -74,6 +74,7 @@ class GameOverMenu extends ConsumerWidget {
                         ElevatedButton(
                           onPressed: () {
                             game.overlays.remove(GameOverMenu.id);
+                            game.resumeEngine();
                             game.startGame();
                           },
                           child: const Text(
