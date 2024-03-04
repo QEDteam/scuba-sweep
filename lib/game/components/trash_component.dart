@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
-import 'package:my_flutter_app/game/helper/enums.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/helper/enums.dart';
 
 class TrashComponent extends SpriteComponent with HasGameRef<MyGame> {
   final String id;

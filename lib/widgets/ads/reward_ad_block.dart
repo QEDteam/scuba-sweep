@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:my_flutter_app/widgets/fp_button.dart';
+import 'package:scuba_sweep/widgets/fp_button.dart';
 import '../../utilities/ad_helper.dart';
 
 class RewardAdBlock extends ConsumerStatefulWidget {

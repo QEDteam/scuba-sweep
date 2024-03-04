@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:my_flutter_app/game/components/enemy_component.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
-import 'package:my_flutter_app/game/helper/enums.dart';
+import 'package:scuba_sweep/game/components/enemy_component.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/helper/enums.dart';
 import 'dart:async' as da;
 
 import 'package:uuid/uuid.dart';
@@ -30,15 +30,17 @@ class EnemyManager extends Component with HasGameRef<MyGame> {
   }
 
   addEnemy() async {
-    final randomEnemy = Random().nextInt(gameRef.level < Enemy.values.length ? gameRef.level : Enemy.values.length);
-      final enemyComponent = EnemyComponent(
-        enemy: Enemy.values[randomEnemy],
-        positionX: gameRef.randomPositionX,
-        id: uuid.v4(),
-        sprite: await enemySprites[randomEnemy],
-      );
-      gameRef.add(enemyComponent);
-      enemyComponents.add(enemyComponent);
+    final randomEnemy = Random().nextInt(gameRef.level < Enemy.values.length
+        ? gameRef.level
+        : Enemy.values.length);
+    final enemyComponent = EnemyComponent(
+      enemy: Enemy.values[randomEnemy],
+      positionX: gameRef.randomPositionX,
+      id: uuid.v4(),
+      sprite: await enemySprites[randomEnemy],
+    );
+    gameRef.add(enemyComponent);
+    enemyComponents.add(enemyComponent);
   }
 
   reset() {

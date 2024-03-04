@@ -5,18 +5,18 @@ import 'package:flame/components.dart' as cp;
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_flutter_app/data/providers/message_provider.dart';
-import 'package:my_flutter_app/data/providers/score_provider.dart';
-import 'package:my_flutter_app/game/components/background_component.dart';
-import 'package:my_flutter_app/game/components/booster_manager.dart';
-import 'package:my_flutter_app/game/components/enemy_manager.dart';
-import 'package:my_flutter_app/game/components/player_component.dart';
-import 'package:my_flutter_app/game/components/score_component.dart';
-import 'package:my_flutter_app/game/components/trash_manager.dart';
-import 'package:my_flutter_app/game/game/widgets/env_message_overlay.dart';
-import 'package:my_flutter_app/game/game/widgets/game_header.dart';
-import 'package:my_flutter_app/game/game/widgets/pause_menu.dart';
-import 'package:my_flutter_app/game/helper/enums.dart';
+import 'package:scuba_sweep/data/providers/message_provider.dart';
+import 'package:scuba_sweep/data/providers/score_provider.dart';
+import 'package:scuba_sweep/game/components/background_component.dart';
+import 'package:scuba_sweep/game/components/booster_manager.dart';
+import 'package:scuba_sweep/game/components/enemy_manager.dart';
+import 'package:scuba_sweep/game/components/player_component.dart';
+import 'package:scuba_sweep/game/components/score_component.dart';
+import 'package:scuba_sweep/game/components/trash_manager.dart';
+import 'package:scuba_sweep/game/game/widgets/env_message_overlay.dart';
+import 'package:scuba_sweep/game/game/widgets/game_header.dart';
+import 'package:scuba_sweep/game/game/widgets/pause_menu.dart';
+import 'package:scuba_sweep/game/helper/enums.dart';
 
 class MyGame extends FlameGame {
   final BuildContext context;
@@ -133,16 +133,17 @@ class MyGame extends FlameGame {
       {required AnimationEffect effect,
       required Vector2 position,
       required Vector2 size}) async {
+        const splash = AnimationEffect.splash;
     final animationEffect = cp.SpriteAnimationComponent.fromFrameData(
-      await images.load('${effect.effectName}.png'),
+      await images.load('${splash.name}.png'),
       cp.SpriteAnimationData.sequenced(
-        amount: effect.amount,
-        amountPerRow: 5,
-        textureSize: size,
-        stepTime: effect.speed,
+        amount: splash.amount,
+        amountPerRow: splash.amountPerRow,
+        textureSize: Vector2.all(splash.size),
+        stepTime: splash.speed,
         loop: false,
       ),
-      size: size / 2,
+      size: size / 1.5,
       removeOnFinish: true,
       anchor: cp.Anchor.center,
     );

@@ -1,8 +1,6 @@
-
-
 import 'package:flame/components.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
-import 'package:my_flutter_app/game/helper/enums.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/helper/enums.dart';
 
 class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   final String id;
@@ -33,7 +31,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
     moveEnemy(dt);
     if (enemy == Enemy.pufferfish) resize();
 
-    final bufferZone = - size.x * 0.2; 
+    final bufferZone = -size.x * 0.2;
 
     final playerRect = gameRef.player.toRect();
     final enemyRect = toRect().inflate(bufferZone);
@@ -56,7 +54,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   setSize() {
     switch (enemy) {
       case Enemy.shark:
-        size = Vector2(280,130);
+        size = Vector2(280, 130);
         break;
       case Enemy.jellyfish:
         size = Vector2.all(200);

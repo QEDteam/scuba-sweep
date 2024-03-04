@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_flutter_app/data/repositories/auth_repository.dart';
-import 'package:my_flutter_app/utilities/enum.dart';
+import 'package:scuba_sweep/data/repositories/auth_repository.dart';
+import 'package:scuba_sweep/utilities/enum.dart';
 
 final firebaseAuthProvider =
     Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);

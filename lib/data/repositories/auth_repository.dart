@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:my_flutter_app/utilities/auth_handler.dart';
-import 'package:my_flutter_app/utilities/enum.dart';
+import 'package:scuba_sweep/utilities/auth_handler.dart';
+import 'package:scuba_sweep/utilities/enum.dart';
 
 class AuthRepository {
   AuthRepository(this._auth);

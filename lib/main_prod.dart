@@ -1,14 +1,14 @@
-import 'package:my_flutter_app/firebase_options_prod.dart';
-import 'package:my_flutter_app/flavor_config.dart';
-import 'package:my_flutter_app/main_common.dart';
+import 'package:scuba_sweep/firebase_options_prod.dart';
+import 'package:scuba_sweep/flavor_config.dart';
+import 'package:scuba_sweep/main_common.dart';
 
 void main() {
   FlavorConfig(
     flavor: Flavor.prod,
     env: "prod",
-    name: "myApp",
+    name: "scuba_sweep",
     values: FlavorValues(
-        bundleID: 'myApp.com',
+        bundleID: 'io.qedcode.scubasweep',
         appID: '',
         baseUrl: '',
         apiUrl: '',

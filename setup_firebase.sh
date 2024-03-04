@@ -9,7 +9,7 @@ read projectEnv
 if [ -z "$projectEnv" ]
 then
     projectEnv="dev"
-    flutterfire configure --project=$projectName --ios-bundle-id="myApp.com.dev" --android-package-name="myApp.com.dev" --android-app-id="myApp.com.dev" --platforms="android,ios" --yes
+    flutterfire configure --project=$projectName --ios-bundle-id="io.qedcode.scubasweep.dev" --android-package-name="io.qedcode.scubasweep.dev" --android-app-id="io.qedcode.scubasweep.dev" --platforms="android,ios" --yes
 else
     flutterfire configure --project=$projectName --platforms="android,ios" --yes
 fi

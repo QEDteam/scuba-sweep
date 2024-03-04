@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_flutter_app/data/models/score_info_model.dart';
-import 'package:my_flutter_app/data/providers/auth_provider.dart';
-import 'package:my_flutter_app/data/repositories/game_repository.dart';
+import 'package:scuba_sweep/data/models/score_info_model.dart';
+import 'package:scuba_sweep/data/providers/auth_provider.dart';
+import 'package:scuba_sweep/data/repositories/game_repository.dart';
 
 part 'score_provider.freezed.dart';
 
@@ -59,13 +59,15 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
     try {
       final ScoreInfo? highScore = await _gameRepository.getHighScore();
       if (highScore != null) {
-        state = state.copyWith(highScore: highScore.score, nickname: highScore.nickname ?? 'user', isLoading: false);
+        state = state.copyWith(
+            highScore: highScore.score,
+            nickname: highScore.nickname ?? 'user',
+            isLoading: false);
         return;
       } else {
         state = state.copyWith(highScore: 0, isLoading: false, nickname: '');
         return;
       }
-      
     } catch (e) {
       return Future.error(e);
     }

@@ -9,12 +9,12 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:my_flutter_app/data/providers/auth_provider.dart';
-import 'package:my_flutter_app/data/providers/theme_provider.dart';
-import 'package:my_flutter_app/services/push_notif_service.dart';
-import 'package:my_flutter_app/utilities/router.dart';
+import 'package:scuba_sweep/data/providers/auth_provider.dart';
+import 'package:scuba_sweep/data/providers/theme_provider.dart';
+import 'package:scuba_sweep/services/push_notif_service.dart';
+import 'package:scuba_sweep/utilities/router.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:my_flutter_app/utilities/theme.dart';
+import 'package:scuba_sweep/utilities/theme.dart';
 
 void mainCommon(options) async {
   await dotenv.load(fileName: ".env");
@@ -37,7 +37,8 @@ void mainCommon(options) async {
     await pushNotifService.registerNotification();
   }
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   final container = ProviderContainer();
 
   await container.read(authStateChangesProvider.future);
@@ -48,19 +49,19 @@ void mainCommon(options) async {
       path: 'assets/translations',
       fallbackLocale: const Locale('en'),
       child: UncontrolledProviderScope(
-          container: container, child: const MyApp())));
+          container: container, child: const scuba_sweep())));
 }
 
 void configLoading() {}
 
-class MyApp extends ConsumerStatefulWidget {
-  const MyApp({super.key});
+class scuba_sweep extends ConsumerStatefulWidget {
+  const scuba_sweep({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => MyAppState();
+  ConsumerState<ConsumerStatefulWidget> createState() => scuba_sweepState();
 }
 
-class MyAppState extends ConsumerState<MyApp> {
+class scuba_sweepState extends ConsumerState<scuba_sweep> {
   @override
   Widget build(BuildContext context) {
     EasyLoading.instance

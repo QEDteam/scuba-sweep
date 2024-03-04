@@ -5,28 +5,38 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "myApp DEV",
+            "name": "scuba_sweep DEV",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
             "program": "lib/main_dev.dart",
-            "args": ["--flavor", "dev", "--no-enable-impeller"],
+            "args": [
+                "--flavor",
+                "dev",
+                "--no-enable-impeller"
+            ],
         },
         {
-            "name": "myApp PROD",
+            "name": "scuba_sweep PROD",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
             "program": "lib/main_prod.dart",
-            "args": ["--flavor", "prod"]
+            "args": [
+                "--flavor",
+                "prod"
+            ]
         },
         {
-            "name": "myApp (profile mode)",
+            "name": "scuba_sweep (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
             "program": "lib/main_dev.dart",
-            "args": ["--flavor", "dev"]
+            "args": [
+                "--flavor",
+                "dev"
+            ]
         }
     ],
     "dart.flutterSdkPath": ".fvm/flutter_sdk",

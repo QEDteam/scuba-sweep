@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_app/data/models/score_info_model.dart';
+import 'package:scuba_sweep/data/models/score_info_model.dart';
 
 class ScoresTable extends StatelessWidget {
   const ScoresTable(this.scoreList, {super.key});

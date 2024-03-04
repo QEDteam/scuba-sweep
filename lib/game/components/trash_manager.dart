@@ -2,9 +2,9 @@ import 'dart:async' as da;
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:my_flutter_app/game/components/trash_component.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
-import 'package:my_flutter_app/game/helper/enums.dart';
+import 'package:scuba_sweep/game/components/trash_component.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/helper/enums.dart';
 import 'package:uuid/uuid.dart';
 
 class TrashManager extends Component with HasGameRef<MyGame> {

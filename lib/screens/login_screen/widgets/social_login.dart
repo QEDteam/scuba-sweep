@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_flutter_app/services/social_auth_service.dart';
-import 'package:my_flutter_app/utilities/auth_handler.dart';
-import 'package:my_flutter_app/utilities/enum.dart';
-import 'package:my_flutter_app/utilities/router.dart';
-import 'package:my_flutter_app/widgets/fp_button.dart';
+import 'package:scuba_sweep/services/social_auth_service.dart';
+import 'package:scuba_sweep/utilities/auth_handler.dart';
+import 'package:scuba_sweep/utilities/enum.dart';
+import 'package:scuba_sweep/utilities/router.dart';
+import 'package:scuba_sweep/widgets/fp_button.dart';
 
 class SocialLogin extends ConsumerWidget {
   const SocialLogin({

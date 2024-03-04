@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // freezed package for generation of boilperplate code
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_flutter_app/utilities/theme.dart';
+import 'package:scuba_sweep/utilities/theme.dart';
 
 // Import freezed file (maybe not yet generated)
 part 'theme_provider.freezed.dart';

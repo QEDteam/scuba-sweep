@@ -1,10 +1,12 @@
 import 'package:flame/components.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
-import 'package:my_flutter_app/game/helper/enums.dart';
+import 'package:flame/sprite.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/helper/enums.dart';
 
-class BoosterComponent extends SpriteComponent with HasGameRef<MyGame> {
+class BoosterComponent extends SpriteAnimationComponent
+    with HasGameRef<MyGame> {
   final double _speed = 200;
-  final double _animationSpeed = 0.05;
+  final double _animationSpeed = 0.03;
   late final SpriteAnimationComponent shieldAnimation;
 
   BoosterComponent({required Vector2 position})
@@ -16,8 +18,10 @@ class BoosterComponent extends SpriteComponent with HasGameRef<MyGame> {
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    sprite = await gameRef.loadSprite('star.png');
+    _loadBoosterComponent();
     _loadAnimation();
+    position = Vector2(gameRef.randomPositionX, 0);
+    size = Vector2.all(80);
   }
 
   @override
@@ -42,21 +46,34 @@ class BoosterComponent extends SpriteComponent with HasGameRef<MyGame> {
   }
 
   void _loadAnimation() async {
-    List<double> stepTimes = List<double>.filled(60, _animationSpeed);
-    stepTimes[29] = 3; // 3 seconds of pause for desired shield frame
+    List<double> stepTimes = List<double>.filled(30, _animationSpeed);
+    stepTimes[13] = 3; // 3 seconds of pause for desired shield frame
 
     shieldAnimation = SpriteAnimationComponent.fromFrameData(
       await gameRef.images.load('shield.png'),
       SpriteAnimationData.variable(
-        amount: 60,
-        amountPerRow: 5,
-        textureSize: Vector2(192, 192),
+        amount: 30,
+        amountPerRow: 6,
+        textureSize: Vector2(384, 384),
         stepTimes: stepTimes,
         loop: false,
       ),
       size: Vector2(200, 200),
       removeOnFinish: true,
       anchor: Anchor.center,
+    );
+  }
+
+  void _loadBoosterComponent() async {
+    final spriteSheet = SpriteSheet(
+      image: await gameRef.images.load('sea_shell.png'),
+      srcSize: Vector2.all(384),
+    );
+    animation = spriteSheet.createAnimation(
+      row: 0,
+      stepTime: 0.1,
+      from: 0,
+      to: 10,
     );
   }
 }

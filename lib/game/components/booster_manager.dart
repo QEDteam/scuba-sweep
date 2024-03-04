@@ -1,9 +1,9 @@
 import 'dart:async' as da;
-import 'dart:core' ;
+import 'dart:core';
 
 import 'package:flame/components.dart';
-import 'package:my_flutter_app/game/components/booster_component.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
+import 'package:scuba_sweep/game/components/booster_component.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
 
 class BoosterManager extends Component with HasGameRef<MyGame> {
   final List<BoosterComponent> _boosters = [];

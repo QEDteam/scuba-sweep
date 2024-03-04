@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:my_flutter_app/data/models/score_info_model.dart';
+import 'package:scuba_sweep/data/models/score_info_model.dart';
 
 class GameRepository {
   GameRepository(this._firestore, this._auth);
@@ -11,9 +11,9 @@ class GameRepository {
     final userId = _auth.currentUser?.uid;
     if (userId != null) {
       await _firestore.collection('highScores').doc(userId).set({
-          'score': score,
-          'nickname': nickname,
-        });
+        'score': score,
+        'nickname': nickname,
+      });
     }
   }
 

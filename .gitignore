@@ -54,5 +54,12 @@ google-creds-prod.json
 applestore_key.p8
 
 # FVM Version Cache
-.fvm/-e 
 key.jks
+
+.env
+google-creds.json
+.fvm/
+scubasweep.jks
+
+-e 
+scubasweep.jks
