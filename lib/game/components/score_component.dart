@@ -1,8 +1,8 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
 
-class ScoreComponent extends PositionComponent with HasGameRef<MyGame>{
+class ScoreComponent extends PositionComponent with HasGameRef<MyGame> {
   int score = 0;
   final BuildContext context;
 

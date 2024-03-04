@@ -1,6 +1,6 @@
 {
-    "name": "my_flutter_app",
-    "short_name": "my_flutter_app",
+    "name": "scuba_sweep",
+    "short_name": "scuba_sweep",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

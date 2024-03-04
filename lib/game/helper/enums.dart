@@ -1,32 +1,44 @@
 
 enum AnimationEffect {
+  splash(
+    effectName: 'splash',
+    amount: 7,
+    amountPerRow: 7,
+    speed: 0.03,
+    size: 384,
+  ),
   burst(
     effectName: 'burst',
     amount: 100,
+    amountPerRow: 5,
     speed: 0.005,
     size: 192,
   ),
   shield(
     effectName: 'shield',
     amount: 60,
+    amountPerRow: 5,
     speed: 0.025,
     size: 192,
   ),
   shimmer(
     effectName: 'shimmer',
     amount: 60,
+    amountPerRow: 5,
     speed: 0.025,
     size: 192,
   ),
   punch(
     effectName: 'punch',
     amount: 30,
+    amountPerRow: 5,
     speed: 0.015,
     size: 192,
   ),
   bubbles(
     effectName: 'bubble_trail',
     amount: 25,
+    amountPerRow: 5,
     speed: 0.2,
     size: 384,
   ),
@@ -34,12 +46,14 @@ enum AnimationEffect {
 
   final String effectName;
   final int amount;
+  final int amountPerRow;
   final double speed;
   final double size;
 
   const AnimationEffect({
     required this.effectName,
     required this.amount,
+    required this.amountPerRow,
     required this.speed,
     required this.size,
   });

@@ -5,10 +5,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_flutter_app/data/providers/auth_provider.dart';
-import 'package:my_flutter_app/data/providers/score_provider.dart';
-import 'package:my_flutter_app/flavor_banner.dart';
-import 'package:my_flutter_app/utilities/router.dart';
+import 'package:scuba_sweep/data/providers/auth_provider.dart';
+import 'package:scuba_sweep/data/providers/score_provider.dart';
+import 'package:scuba_sweep/flavor_banner.dart';
+import 'package:scuba_sweep/utilities/router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -72,7 +72,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     const SizedBox(
                       width: 300,
                       child: Text(
-                        'Take on the challenge in Scuba Sweep to cleanse the ocean depths and protect marine life.',
+                        'Take on the challenge in scuba_sweep to cleanse the ocean depths and protect marine life.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,

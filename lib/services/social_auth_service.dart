@@ -7,8 +7,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:my_flutter_app/data/providers/auth_provider.dart';
-import 'package:my_flutter_app/utilities/enum.dart';
+import 'package:scuba_sweep/data/providers/auth_provider.dart';
+import 'package:scuba_sweep/utilities/enum.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:crypto/crypto.dart';
 

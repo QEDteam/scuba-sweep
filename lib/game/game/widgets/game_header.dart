@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
 
 class GameHeader extends StatelessWidget {
   static const id = 'GameHeader';

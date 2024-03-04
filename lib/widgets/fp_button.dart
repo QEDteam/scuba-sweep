@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_app/utilities/theme.dart';
+import 'package:scuba_sweep/utilities/theme.dart';
 
 class FpButton extends StatelessWidget {
   const FpButton({

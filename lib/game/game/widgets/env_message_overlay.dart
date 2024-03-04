@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_flutter_app/data/providers/message_provider.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
-import 'package:my_flutter_app/game/game/widgets/game_over_menu.dart';
+import 'package:scuba_sweep/data/providers/message_provider.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/game/widgets/game_over_menu.dart';
 
 class EnvMessageOverlay extends ConsumerWidget {
   static const id = 'EnvMessageOverlay';
@@ -33,18 +33,19 @@ class EnvMessageOverlay extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: state.isLoading ? const CircularProgressIndicator()
-                      : SizedBox(
-                          width: 400,
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            state.message,
-                            style: const TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
+                    child: state.isLoading
+                        ? const CircularProgressIndicator()
+                        : SizedBox(
+                            width: 400,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              state.message,
+                              style: const TextStyle(
+                                fontSize: 30,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
                   ),
                   ElevatedButton(
                     onPressed: () {

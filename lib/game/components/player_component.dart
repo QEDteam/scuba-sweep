@@ -1,12 +1,12 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
 
 enum Direction { right, left, none }
 
 class PlayerComponent extends SpriteAnimationComponent
-    with DragCallbacks, HasGameRef<MyGame>{
+    with DragCallbacks, HasGameRef<MyGame> {
   final double _animationSpeed = 0.05; //old: 0.2
 
   late final SpriteAnimation _initialAnimation;
@@ -114,7 +114,5 @@ class PlayerComponent extends SpriteAnimationComponent
     _loadShieldAnimation();
   }
 
-  Future<void> _loadShieldAnimation() async {
-    
-  }
+  Future<void> _loadShieldAnimation() async {}
 }

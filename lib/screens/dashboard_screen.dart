@@ -3,12 +3,12 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:my_flutter_app/data/providers/auth_provider.dart';
-import 'package:my_flutter_app/data/providers/theme_provider.dart';
-import 'package:my_flutter_app/flavor_banner.dart';
-import 'package:my_flutter_app/widgets/ads/banner_ad_block.dart';
-import 'package:my_flutter_app/widgets/ads/native_ad_block.dart';
-import 'package:my_flutter_app/widgets/ads/reward_ad_block.dart';
+import 'package:scuba_sweep/data/providers/auth_provider.dart';
+import 'package:scuba_sweep/data/providers/theme_provider.dart';
+import 'package:scuba_sweep/flavor_banner.dart';
+import 'package:scuba_sweep/widgets/ads/banner_ad_block.dart';
+import 'package:scuba_sweep/widgets/ads/native_ad_block.dart';
+import 'package:scuba_sweep/widgets/ads/reward_ad_block.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});

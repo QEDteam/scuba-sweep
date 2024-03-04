@@ -1,7 +1,7 @@
 import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_flutter_app/data/repositories/open_ai_repository.dart';
+import 'package:scuba_sweep/data/repositories/open_ai_repository.dart';
 
 part 'message_provider.freezed.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_flutter_app/data/providers/auth_provider.dart';
-import 'package:my_flutter_app/game/pages/game_page.dart';
-import 'package:my_flutter_app/screens/login_screen/login_screen.dart';
-import 'package:my_flutter_app/screens/splash_screen.dart';
-import 'package:my_flutter_app/utilities/router_refresh.dart';
+import 'package:scuba_sweep/data/providers/auth_provider.dart';
+import 'package:scuba_sweep/game/pages/game_page.dart';
+import 'package:scuba_sweep/screens/login_screen/login_screen.dart';
+import 'package:scuba_sweep/screens/splash_screen.dart';
+import 'package:scuba_sweep/utilities/router_refresh.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // GoRouter configuration

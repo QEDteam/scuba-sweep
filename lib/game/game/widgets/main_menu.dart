@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_flutter_app/data/providers/auth_provider.dart';
-import 'package:my_flutter_app/game/game/my_game.dart';
+import 'package:scuba_sweep/data/providers/auth_provider.dart';
+import 'package:scuba_sweep/game/game/my_game.dart';
 
 class MainMenu extends ConsumerWidget {
   static const id = 'MainMenu';
@@ -55,7 +55,8 @@ class MainMenu extends ConsumerWidget {
                   ),
                   const SizedBox(height: 20),
                   TextButton(
-                    onPressed: () => ref.read(signInProvider.notifier).signOut(),
+                    onPressed: () =>
+                        ref.read(signInProvider.notifier).signOut(),
                     child: const Text(
                       'Sign out',
                       style: TextStyle(color: Colors.white),
