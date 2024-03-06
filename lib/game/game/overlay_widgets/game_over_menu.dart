@@ -57,20 +57,20 @@ class GameOverMenu extends ConsumerWidget {
             ),
           ),
           ActionButton(
-            title: 'leaderboard',
-            customColor: AppColors.green,
-            onPressed: () {
-              game.overlays.remove(GameOverMenu.id);
-              game.overlays.add(LeaderBoardOverlay.id);
-            },
-          ),
-          const SizedBox(height: 20),
-          ActionButton(
             title: 'play_again',
             onPressed: () {
               game.overlays.remove(GameOverMenu.id);
               game.resumeEngine();
               game.startGame();
+            },
+          ),
+          const SizedBox(height: 20),
+          ActionButton(
+            title: 'leaderboard',
+            customColor: AppColors.green,
+            onPressed: () {
+              game.overlays.remove(GameOverMenu.id);
+              game.overlays.add(LeaderBoardOverlay.id);
             },
           ),
           const SizedBox(height: 40),

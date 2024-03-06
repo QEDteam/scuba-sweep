@@ -46,7 +46,7 @@ class ScoresTable extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              '${scoreList.indexOf(e) + 1}.',
+                              '${scoreList.indexOf(e) + 1}',
                               style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
