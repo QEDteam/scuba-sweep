@@ -134,16 +134,16 @@ class MyGame extends FlameGame {
 
   Future<void> addEffect(
       {required AnimationEffect effect,
-      required Vector2 position,
-      required Vector2 size}) async {
-    const splash = AnimationEffect.splash;
+      required Vector2 position, 
+      required Vector2 size
+      }) async {
     final animationEffect = cp.SpriteAnimationComponent.fromFrameData(
-      await images.load('${splash.name}.png'),
+      await images.load('${effect.name}.png'),
       cp.SpriteAnimationData.sequenced(
-        amount: splash.amount,
-        amountPerRow: splash.amountPerRow,
-        textureSize: Vector2.all(splash.size),
-        stepTime: splash.speed,
+        amount: effect.amount,
+        amountPerRow: effect.amountPerRow,
+        textureSize: Vector2.all(effect.size),
+        stepTime: effect.speed,
         loop: false,
       ),
       size: size / 1.5,
