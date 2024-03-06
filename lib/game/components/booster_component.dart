@@ -5,11 +5,12 @@ import 'package:scuba_sweep/game/helper/enums.dart';
 
 class BoosterComponent extends SpriteAnimationComponent
     with HasGameRef<MyGame> {
+  final String id;
   final double _speed = 200;
   final double _animationSpeed = 0.03;
   late final SpriteAnimationComponent shieldAnimation;
 
-  BoosterComponent({required Vector2 position})
+  BoosterComponent({required Vector2 position, required this.id,})
       : super(
           size: Vector2.all(50.0),
           position: position,
@@ -20,7 +21,6 @@ class BoosterComponent extends SpriteAnimationComponent
     super.onLoad();
     _loadBoosterComponent();
     _loadAnimation();
-    position = Vector2(gameRef.randomPositionX, 0);
     size = Vector2.all(80);
   }
 
@@ -38,6 +38,7 @@ class BoosterComponent extends SpriteAnimationComponent
   }
 
   void boost() {
+    gameRef.boosterManager.removeBooster(this.id);
     gameRef.boosterManager.shieldAnimation = shieldAnimation;
     gameRef.player.hasShield = true;
     gameRef.add(shieldAnimation);

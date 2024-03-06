@@ -43,7 +43,7 @@ class GameRepository {
     final querySnapshot = await _firestore
         .collection('highScores')
         .orderBy('score', descending: true)
-        .limit(3)
+        .limit(8)
         .get();
     return querySnapshot.docs
         .map<ScoreInfo>((doc) => ScoreInfo.fromJson(doc.data()))

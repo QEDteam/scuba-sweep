@@ -54,10 +54,10 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   setSize() {
     switch (enemy) {
       case Enemy.shark:
-        size = Vector2(280, 130);
+        size = Vector2(220, 130);
         break;
       case Enemy.jellyfish:
-        size = Vector2.all(200);
+        size = Vector2(80, 120);
         break;
       default:
         size = Vector2.all(100);

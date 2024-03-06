@@ -7,12 +7,12 @@ enum AnimationEffect {
     speed: 0.03,
     size: 384,
   ),
-  burst(
-    effectName: 'burst',
-    amount: 100,
-    amountPerRow: 5,
-    speed: 0.005,
-    size: 192,
+  crash(
+    effectName: 'crash',
+    amount: 11,
+    amountPerRow: 6,
+    speed: 0.2,
+    size: 384,
   ),
   shield(
     effectName: 'shield',
@@ -34,13 +34,6 @@ enum AnimationEffect {
     amountPerRow: 5,
     speed: 0.015,
     size: 192,
-  ),
-  bubbles(
-    effectName: 'bubble_trail',
-    amount: 25,
-    amountPerRow: 5,
-    speed: 0.2,
-    size: 384,
   ),
   ;
 
