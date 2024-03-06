@@ -96,13 +96,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     controller: nicknameController,
                   ),
                   const SizedBox(height: 30),
-                  SizedBox(
-                    width: double.infinity,
-                    child: state.isLoading
-                        ? const CircularProgressIndicator(
+                  state.isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
                             color: Colors.white,
-                          )
-                        : ActionButton(
+                          ),
+                        )
+                      : SizedBox(
+                          width: double.infinity,
+                          child: ActionButton(
                             title: "NEXT",
                             onPressed: () => state.isLoading
                                 ? null
@@ -115,7 +117,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                           .setNickname(nicknameController.text),
                                     ),
                           ),
-                  ),
+                        ),
                 ],
               ),
             ),
