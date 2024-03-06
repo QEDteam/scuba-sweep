@@ -151,7 +151,7 @@ class _$ScoreStateImpl extends _ScoreState {
       this.highScore = 0,
       final List<ScoreInfo> topHighScores = const [],
       this.isLoading = false,
-      this.nickname = 'User'})
+      this.nickname = ''})
       : _topHighScores = topHighScores,
         super._();
 

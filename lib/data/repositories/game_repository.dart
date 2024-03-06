@@ -7,6 +7,17 @@ class GameRepository {
   final FirebaseFirestore _firestore;
   final FirebaseAuth _auth;
 
+  Future<String> getNickname() async {
+    final userId = _auth.currentUser?.uid;
+    if (userId != null) {
+      final doc = await _firestore.collection('highScores').doc(userId).get();
+      if (doc.exists) {
+        return doc.data()!['nickname'];
+      }
+    }
+    return '';
+  }
+
   Future<void> saveHighScore(int score, String nickname) async {
     final userId = _auth.currentUser?.uid;
     if (userId != null) {

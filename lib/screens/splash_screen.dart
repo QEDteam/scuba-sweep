@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:scuba_sweep/data/providers/score_provider.dart';
 import 'package:scuba_sweep/game/helper/colors.dart';
 import 'package:scuba_sweep/utilities/router.dart';
 
@@ -38,6 +39,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     });
 
     Future.delayed(const Duration(seconds: 2)).then((value) async {
+      ref.read(scoreNotifierProvider.notifier).getNickname();
       ref.read(routerProvider).go("/login");
     });
   }
