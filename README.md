@@ -116,10 +116,7 @@ fvm flutter pub run build_runner build --delete-conflicting-outputs
 
 ## Gameplay
 
-<iframe width="315" height="560"
-src="https://www.youtube.com/embed/PkGjXejEecI?si=ovRUb6IrP2K91S5u"
-title="YouTube video player" frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-gyroscope; picture-in-picture;
-web-share"
-allowfullscreen></iframe>
+<video width="315" height="560" controls>
+  <source src="https://www.youtube.com/embed/PkGjXejEecI?si=ovRUb6IrP2K91S5u" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
