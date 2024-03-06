@@ -1,12 +1,11 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:scuba_sweep/data/providers/auth_provider.dart';
 import 'package:scuba_sweep/game/game/my_game.dart';
 import 'package:scuba_sweep/game/game/overlay_widgets/overlay_frame.dart';
 import 'package:scuba_sweep/game/helper/styles.dart';
 import 'package:scuba_sweep/screens/widgets/action_button.dart';
+import 'package:scuba_sweep/screens/widgets/logout_button.dart';
 
 class PauseMenu extends ConsumerWidget {
   static const id = 'PauseMenu';
@@ -36,13 +35,7 @@ class PauseMenu extends ConsumerWidget {
               },
             ),
             const SizedBox(height: 20),
-            TextButton(
-              onPressed: () => ref.read(signInProvider.notifier).signOut(),
-              child: Text(
-                'exit',
-                style: exitTextstyle,
-              ).tr(),
-            )
+            const LogoutButton()
           ],
         ),
       ),

@@ -23,9 +23,9 @@ class LeaderBoardOverlay extends ConsumerWidget {
       child: Column(
         children: [
           Text(
-            'Leaderboard',
+            'leaderboard',
             style: titleTextStyle,
-          ),
+          ).tr(),
           const SizedBox(height: 40),
           state.isLoading
               ? const Center(child: CircularProgressIndicator())
