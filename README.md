@@ -114,9 +114,6 @@ fvm flutter pub get && fvm flutter pub run flutter_launcher_icons:main -f flutte
 fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-## Gameplay
+## Download Apk File
 
-<video width="315" height="560" controls>
-  <source src="https://www.youtube.com/embed/PkGjXejEecI?si=ovRUb6IrP2K91S5u" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Apk File from releases directory](https://github.com/QEDteam/scuba-sweep/tree/main/releases/scuba_sweep1-2-1.apk)
