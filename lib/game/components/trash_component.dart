@@ -31,9 +31,9 @@ class TrashComponent extends SpriteComponent with HasGameRef<MyGame> {
         trashComponents.indexWhere((element) => element.id == componentId);
     if (index != -1) {
       gameRef.addEffect(
-        effect: AnimationEffect.punch,
         position: trashComponents[index].position,
-        size: Vector2.all(AnimationEffect.punch.size),
+        effect: AnimationEffect.splash,
+        size: Vector2.all(AnimationEffect.splash.size),
       );
       gameRef.remove(trashComponents[index]);
       gameRef.scoreComponent.incrementScore();

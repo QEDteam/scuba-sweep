@@ -21,20 +21,6 @@ enum AnimationEffect {
     speed: 0.025,
     size: 192,
   ),
-  shimmer(
-    effectName: 'shimmer',
-    amount: 60,
-    amountPerRow: 5,
-    speed: 0.025,
-    size: 192,
-  ),
-  punch(
-    effectName: 'punch',
-    amount: 30,
-    amountPerRow: 5,
-    speed: 0.015,
-    size: 192,
-  ),
   ;
 
   final String effectName;
