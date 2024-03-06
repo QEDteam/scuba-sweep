@@ -13,7 +13,6 @@ Scuba Sweep aims to shed light on the pressing issue of ocean plastic pollution.
 <img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/5125c4c4-1cf6-466c-a79c-d7af08701c12"/>
 <img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/e3faab95-55e6-4985-9ed7-9195ca6b5214"/>
 <img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/02084009-e844-42b5-915e-59fe1a08277e"/>
-<img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/47f6e613-c186-42a3-92fd-9f249d787207"/>
 <img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/100d7102-a484-478d-a567-1183c7ea22b1"/>
 
 ## How we built it
@@ -114,3 +113,13 @@ fvm flutter pub get && fvm flutter pub run flutter_launcher_icons:main -f flutte
 ```bash
 fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```
+
+## Gameplay
+
+<iframe width="315" height="560"
+src="https://www.youtube.com/embed/PkGjXejEecI?si=ovRUb6IrP2K91S5u"
+title="YouTube video player" frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+gyroscope; picture-in-picture;
+web-share"
+allowfullscreen></iframe>
