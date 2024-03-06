@@ -38,14 +38,18 @@ class MainMenu extends ConsumerWidget {
                   width: 230,
                 ),
                 const SizedBox(height: 40),
-                Text(
-                  state.nickname,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    color: AppColors.white,
-                    fontFamily: 'LilitaOne',
-                  ),
-                ),
+                state.isLoading
+                    ? const CircularProgressIndicator(
+                        color: AppColors.primary,
+                      )
+                    : Text(
+                        state.nickname,
+                        style: const TextStyle(
+                          fontSize: 30,
+                          color: AppColors.white,
+                          fontFamily: 'LilitaOne',
+                        ),
+                      ),
                 const SizedBox(height: 40),
                 ActionButton(
                   title: 'play',

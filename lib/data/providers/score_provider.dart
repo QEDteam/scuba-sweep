@@ -32,6 +32,20 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
 
   ScoreNotifier(this._gameRepository, this.ref) : super(const ScoreState());
 
+  Future<String> getNickname() async {
+    if (state.nickname == '') {
+      state = state.copyWith(isLoading: true);
+      try {
+        await _gameRepository.getNickname().then((value) {
+        state = state.copyWith(nickname: value, isLoading: false);
+      });
+      } catch (e) {
+        return Future.error(e);
+      }
+    }
+    return state.nickname;
+  }
+
   void setNickname(String nickname) {
     state = state.copyWith(nickname: nickname);
     saveNickname(nickname);
@@ -61,7 +75,7 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
       if (highScore != null) {
         state = state.copyWith(
             highScore: highScore.score,
-            nickname: highScore.nickname ?? 'user',
+            nickname: highScore.nickname ?? '',
             isLoading: false);
         return;
       } else {
