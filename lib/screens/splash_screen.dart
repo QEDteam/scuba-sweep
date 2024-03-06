@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:scuba_sweep/game/helper/colors.dart';
 import 'package:scuba_sweep/utilities/router.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -36,21 +37,33 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       // Handle errors
     });
 
-    Future.delayed(const Duration(seconds: 1)).then((value) async {
+    Future.delayed(const Duration(seconds: 2)).then((value) async {
       ref.read(routerProvider).go("/login");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color.fromARGB(255, 65, 152, 251),
+    return Scaffold(
+      backgroundColor: AppColors.primary,
       body: Center(
-        child: SizedBox(
-          width: 300,
-          child: LinearProgressIndicator(
-            color: Colors.white,
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              "assets/images/logo.png",
+              width: 300,
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            const SizedBox(
+              width: 300,
+              child: LinearProgressIndicator(
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

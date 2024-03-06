@@ -49,19 +49,19 @@ void mainCommon(options) async {
       path: 'assets/translations',
       fallbackLocale: const Locale('en'),
       child: UncontrolledProviderScope(
-          container: container, child: const scuba_sweep())));
+          container: container, child: const ScubaSweep())));
 }
 
 void configLoading() {}
 
-class scuba_sweep extends ConsumerStatefulWidget {
-  const scuba_sweep({super.key});
+class ScubaSweep extends ConsumerStatefulWidget {
+  const ScubaSweep({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => scuba_sweepState();
+  ConsumerState<ConsumerStatefulWidget> createState() => ScubaSweepState();
 }
 
-class scuba_sweepState extends ConsumerState<scuba_sweep> {
+class ScubaSweepState extends ConsumerState<ScubaSweep> {
   @override
   Widget build(BuildContext context) {
     EasyLoading.instance
@@ -77,12 +77,6 @@ class scuba_sweepState extends ConsumerState<scuba_sweep> {
 
     final router = ref.watch(routerProvider);
     ThemeMode themeMode = ref.watch(themeProvider).mode;
-
-    // return const MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: 'Game',
-    //   home: GamePage(),
-    // );
 
     return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,

@@ -7,7 +7,7 @@ enum Direction { right, left, none }
 
 class PlayerComponent extends SpriteAnimationComponent
     with DragCallbacks, HasGameRef<MyGame> {
-  final double _animationSpeed = 0.05; //old: 0.2
+  final double _animationSpeed = 0.05;
 
   late final SpriteAnimation _initialAnimation;
   late final SpriteAnimation _goLeftAnimation;

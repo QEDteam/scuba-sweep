@@ -13,7 +13,7 @@ import 'package:scuba_sweep/main_common.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const scuba_sweep());
+    await tester.pumpWidget(const ScubaSweep());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

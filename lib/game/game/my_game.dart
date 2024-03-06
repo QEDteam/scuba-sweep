@@ -13,9 +13,9 @@ import 'package:scuba_sweep/game/components/enemy_manager.dart';
 import 'package:scuba_sweep/game/components/player_component.dart';
 import 'package:scuba_sweep/game/components/score_component.dart';
 import 'package:scuba_sweep/game/components/trash_manager.dart';
-import 'package:scuba_sweep/game/game/widgets/env_message_overlay.dart';
-import 'package:scuba_sweep/game/game/widgets/game_header.dart';
-import 'package:scuba_sweep/game/game/widgets/pause_menu.dart';
+import 'package:scuba_sweep/game/game/overlay_widgets/env_message_overlay.dart';
+import 'package:scuba_sweep/game/game/overlay_widgets/game_header.dart';
+import 'package:scuba_sweep/game/game/overlay_widgets/pause_menu.dart';
 import 'package:scuba_sweep/game/helper/enums.dart';
 
 class MyGame extends FlameGame {
@@ -99,15 +99,18 @@ class MyGame extends FlameGame {
     await parallaxComponent.updateSpeed(gameSpeed);
   }
 
-  void sharkAttack(String componentId) {
+  void sharkAttack(String componentId) async {
     final enemies = enemyManager.enemyComponents;
     final index = enemies.indexWhere((element) => element.id == componentId);
     if (index != -1) {
       addEffect(
-          effect: AnimationEffect.burst,
+          effect: AnimationEffect.crash,
           position: enemies[index].position,
           size: Vector2.all(192));
-      gameOver();
+      remove(enemies[index]);
+      Future.delayed(const Duration(milliseconds: 300), () {
+        gameOver();
+      });
     }
   }
 
@@ -133,7 +136,7 @@ class MyGame extends FlameGame {
       {required AnimationEffect effect,
       required Vector2 position,
       required Vector2 size}) async {
-        const splash = AnimationEffect.splash;
+    const splash = AnimationEffect.splash;
     final animationEffect = cp.SpriteAnimationComponent.fromFrameData(
       await images.load('${splash.name}.png'),
       cp.SpriteAnimationData.sequenced(

@@ -1,3 +1,29 @@
 {
-
+    "login": {
+        "nickname": "NICKNAME",
+        "choose": "Choose a nickname"
+    },
+    "welcome": {
+        "title": "Welcome aboard!",
+        "message": "Take on the challenge in Scuba Sweep to cleanse the ocean depths and protect marine life."
+    },
+    "next": "NEXT",
+    "logout": "Log out",
+    "dive_deeper": "DIVE DEEPER",
+    "continue": "CONTINUE",
+    "game_over": "Game over",
+    "leaderboard": "LEADERBOARD",
+    "play_again": "PLAY AGAIN",
+    "instructions": {
+        "title": "Instructions",
+        "drag": "Drag to move the player",
+        "avoid": "Avoid sea creatures",
+        "collect": "Collect pearls to activate a protective shield"
+    },
+    "dive_in": "DIVE IN",
+    "back": "Back",
+    "play": "PLAY",
+    "game_paused": "Game paused",
+    "resume": "RESUME",
+    "exit": "Exit"
 }
