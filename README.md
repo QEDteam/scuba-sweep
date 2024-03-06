@@ -1,93 +1,116 @@
-# game-challenge
+# Scuba Sweep - Flutter Game
 
+![image info](https://github.com/QEDteam/scuba-sweep/assets/30495155/627c1dfe-8e15-471f-92a0-ec98703995c4)
 
+## Welcome to Scuba Sweep, a captivating underwater adventure game built with Flutter
 
-## Getting started
+Our project draws inspiration from our deep concern for the environment, particularly the dire issue of plastic pollution in our oceans. Witnessing the suffering of innocent sea creatures like turtles and fish due to plastic waste deeply saddens us. Consequently, we are driven by a strong desire to showcase actionable steps we can take to make a positive difference. The game was built for [DEVPOST Global Gamers Challenge - Flutter](https://globalgamers.devpost.com/)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## What it does
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Scuba Sweep aims to shed light on the pressing issue of ocean plastic pollution. Players immerse themselves in the role of a diver navigating through the ocean depths, tasked with collecting different types of plastic debris encountered along the way. Amidst this mission, they must also navigate past hazardous sea creatures, adding an element of challenge and urgency to the gameplay experience.
 
-## Add your files
+<img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/5125c4c4-1cf6-466c-a79c-d7af08701c12"/>
+<img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/e3faab95-55e6-4985-9ed7-9195ca6b5214"/>
+<img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/02084009-e844-42b5-915e-59fe1a08277e"/>
+<img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/47f6e613-c186-42a3-92fd-9f249d787207"/>
+<img width="200" src="https://github.com/QEDteam/scuba-sweep/assets/30495155/100d7102-a484-478d-a567-1183c7ea22b1"/>
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## How we built it
 
+The game is crafted using Flutter, with Flame serving as the game engine and Riverpod for state management. Players have the freedom to select their own nickname to personalize their score tracking experience.
+
+As the game begins, the diver component is introduced, automatically ascending and responsive to left or right movements via drag controls. Gradually, plastic and enemy components are introduced, each featuring distinct movements tailored to their creature type, heightening the challenge for players.
+
+Additionally, divers can collect booster components like the shell pearl, providing a temporary shield, offering protection against enemy encounters. The game concludes when the player component collides with enemies, signaling the end of the gameplay session.
+
+## Prerequisites
+
+Foundation is built with [Flutter Presetup](https://github.com/vbalagovic/flutter-presetup) tool that we developed internaly to help kickstart new projects.
+
+- Flutter version 3.16.2
+- [Use fvm for flutter versioning if default flutter version is not right]
+- if fvm flutter is not setup in your working environment (vs code/ android studio) use prefix fvm when running command `fvm flutter build ...`
+
+- vs code settings.json for fvm usage automatically based by project
+
+```json
+"dart.flutterSdkPath": ".fvm/flutter_sdk",
+// Remove .fvm files from search
+"search.exclude": {
+    "**/.fvm": true
+},
+// Remove from file watching
+"files.watcherExclude": {
+    "**/.fvm": true
+},
 ```
-cd existing_repo
-git remote add origin https://gitlab.qed.services/game-challenge/game-challenge.git
-git branch -M master
-git push -uf origin master
+
+## Getting Started
+
+This project uses Flutter flavor, with two flavors:
+
+- dev
+- prod
+
+Populate `lib/main_{flavor}.dart` file to update params for specific environments
+
+- ### Running flavors
+
+    To run dev env debug:
+
+    ```bash
+    flutter run --flavor dev -t lib/main_dev.dart
+    ```
+
+    To run prod env debug:
+
+    ```bash
+    flutter run --flavor prod -t lib/main_prod.dart
+    ```
+
+## Building application
+
+Build per flavors, for android firebase build apk and for play store appbundle
+
+### Android
+
+- Dev APK:
+
+```bash
+fvm flutter build apk --split-per-abi --flavor dev -t lib/main_dev.dart
 ```
 
-## Integrate with your tools
+- Prod AppBundle:
 
-- [ ] [Set up project integrations](https://gitlab.qed.services/game-challenge/game-challenge/-/settings/integrations)
+```bash
+fvm flutter build appbundle --flavor prod -t lib/main_prod.dart
+```
 
-## Collaborate with your team
+#### IOs
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+- Dev ipa:
 
-## Test and Deploy
+```bash
+fvm flutter build ipa --flavor dev -t lib/main_dev.dart
+```
 
-Use the built-in continuous integration in GitLab.
+- Prod ipa:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+```bash
+fvm flutter build ipa --flavor prod -t lib/main_prod.dart
+```
 
-***
+## Generate Icons
 
-# Editing this README
+To assets folder add icons named by env `launcher-icon-dev.png`, `launcher-icon-prod.png` and then run:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```bash
+fvm flutter pub get && fvm flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
+```
 
-## Suggestions for a good README
+## Generate freezed files
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+```bash
+fvm flutter pub run build_runner build --delete-conflicting-outputs
+```

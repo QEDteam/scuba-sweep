@@ -10,8 +10,10 @@ class BoosterComponent extends SpriteAnimationComponent
   final double _animationSpeed = 0.03;
   late final SpriteAnimationComponent shieldAnimation;
 
-  BoosterComponent({required Vector2 position, required this.id,})
-      : super(
+  BoosterComponent({
+    required Vector2 position,
+    required this.id,
+  }) : super(
           size: Vector2.all(50.0),
           position: position,
         );

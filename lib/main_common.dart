@@ -8,7 +8,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scuba_sweep/data/providers/auth_provider.dart';
 import 'package:scuba_sweep/data/providers/theme_provider.dart';
 import 'package:scuba_sweep/services/push_notif_service.dart';
@@ -20,14 +19,13 @@ void mainCommon(options) async {
   await dotenv.load(fileName: ".env");
   OpenAI.apiKey = dotenv.env['OPEN_AI_API_KEY']!;
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: options,
   );
   // ignore: unused_local_variable
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  final pushNotifService = PushNotificationsService();
+  /* final pushNotifService = PushNotificationsService();
 
   if (Platform.isIOS) {
     Future.delayed(const Duration(milliseconds: 500), () async {
@@ -35,7 +33,7 @@ void mainCommon(options) async {
     });
   } else {
     await pushNotifService.registerNotification();
-  }
+  } */
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -94,7 +92,8 @@ class ScubaSweepState extends ConsumerState<ScubaSweep> {
         return MediaQuery(
           // Set the default textScaleFactor to 1.0 for
           // the whole subtree.
-          data: mediaQueryData.copyWith(textScaleFactor: 1.0),
+          data:
+              mediaQueryData.copyWith(textScaler: const TextScaler.linear(1.0)),
           child: child!,
         );
       }),
