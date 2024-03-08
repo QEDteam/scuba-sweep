@@ -11,14 +11,14 @@ enum AnimationEffect {
     effectName: 'crash',
     amount: 11,
     amountPerRow: 6,
-    speed: 0.2,
+    speed: 0.03,
     size: 384,
   ),
   shield(
     effectName: 'shield',
     amount: 60,
     amountPerRow: 5,
-    speed: 0.025,
+    speed: 0.02,
     size: 192,
   ),
   ;

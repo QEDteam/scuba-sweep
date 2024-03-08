@@ -33,7 +33,7 @@ class TrashComponent extends SpriteComponent with HasGameRef<MyGame> {
       gameRef.addEffect(
         position: trashComponents[index].position,
         effect: AnimationEffect.splash,
-        size: Vector2.all(AnimationEffect.splash.size),
+        size: Vector2.all(150),
       );
       gameRef.remove(trashComponents[index]);
       gameRef.scoreComponent.incrementScore();

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:scuba_sweep/game/helper/colors.dart';
 
 class TextInputField extends StatelessWidget {
@@ -34,6 +35,7 @@ class TextInputField extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               controller: controller,
+              inputFormatters: [LengthLimitingTextInputFormatter(16)],
               style: const TextStyle(
                   color: AppColors.primary,
                   fontFamily: 'LilitaOne',
