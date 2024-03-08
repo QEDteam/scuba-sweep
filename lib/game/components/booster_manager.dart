@@ -47,4 +47,11 @@ class BoosterManager extends Component with HasGameRef<MyGame> {
       _boosters.removeAt(index);
     }
   }
+
+  void reset() {
+    timer.cancel();
+    for (var booster in _boosters) {
+      booster.removeFromParent();
+    }
+  }
 }

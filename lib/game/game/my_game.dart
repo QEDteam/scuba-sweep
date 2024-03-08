@@ -106,9 +106,10 @@ class MyGame extends FlameGame {
       addEffect(
           effect: AnimationEffect.crash,
           position: enemies[index].position,
-          size: Vector2.all(192));
+          size: Vector2.all(200));
       remove(enemies[index]);
-      Future.delayed(const Duration(milliseconds: 300), () {
+      player.isDead = true;
+      Future.delayed(const Duration(milliseconds: 600), () {
         gameOver();
       });
     }
@@ -124,19 +125,20 @@ class MyGame extends FlameGame {
 
   void reset() {
     trashManager.reset();
-    boosterManager.timer.cancel();
+    boosterManager.reset();
     enemyManager.reset();
     level = 0;
     gameSpeed = SpeedMode.slow;
     parallaxComponent.reset();
+    player.isDead = false;
+    player.setToInitialPosition();
     remove(player);
   }
 
   Future<void> addEffect(
       {required AnimationEffect effect,
-      required Vector2 position, 
-      required Vector2 size
-      }) async {
+      required Vector2 position,
+      required Vector2 size}) async {
     final animationEffect = cp.SpriteAnimationComponent.fromFrameData(
       await images.load('${effect.name}.png'),
       cp.SpriteAnimationData.sequenced(
@@ -146,7 +148,7 @@ class MyGame extends FlameGame {
         stepTime: effect.speed,
         loop: false,
       ),
-      size: size / 1.5,
+      size: size,
       removeOnFinish: true,
       anchor: cp.Anchor.center,
     );
