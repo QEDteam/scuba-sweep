@@ -4,7 +4,6 @@ import 'package:dart_openai/dart_openai.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -15,9 +14,10 @@ import 'package:scuba_sweep/utilities/router.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:scuba_sweep/utilities/theme.dart';
 
+import 'data/envied/env.dart';
+
 void mainCommon(options) async {
-  await dotenv.load(fileName: ".env");
-  OpenAI.apiKey = dotenv.env['OPEN_AI_API_KEY']!;
+  OpenAI.apiKey = Env.openaiApiKey;
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
