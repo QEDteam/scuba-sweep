@@ -106,9 +106,9 @@ class MyGame extends FlameGame {
       addEffect(
           effect: AnimationEffect.crash,
           position: enemies[index].position,
-          size: Vector2.all(192));
+          size: Vector2.all(200));
       remove(enemies[index]);
-      Future.delayed(const Duration(milliseconds: 300), () {
+      Future.delayed(const Duration(milliseconds: 600), () {
         gameOver();
       });
     }
@@ -146,7 +146,7 @@ class MyGame extends FlameGame {
         stepTime: effect.speed,
         loop: false,
       ),
-      size: size / 1.5,
+      size: size,
       removeOnFinish: true,
       anchor: cp.Anchor.center,
     );
