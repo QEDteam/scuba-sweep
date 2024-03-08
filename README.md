@@ -114,6 +114,6 @@ fvm flutter pub get && fvm flutter pub run flutter_launcher_icons:main -f flutte
 fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-## Download Apk File
+## Download Apk Files
 
 [Apk File from releases directory](https://github.com/QEDteam/scuba-sweep/raw/main/releases/scuba_sweep1-2-1.apk)
