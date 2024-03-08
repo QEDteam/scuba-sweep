@@ -106,7 +106,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           width: double.infinity,
                           child: ActionButton(
                             title: "NEXT",
-                            onPressed: () => state.isLoading
+                            onPressed: () => (state.isLoading || nicknameController.text.isEmpty)
                                 ? null
                                 : ref
                                     .read(signInProvider.notifier)
