@@ -36,13 +36,14 @@ class BoosterComponent extends SpriteAnimationComponent
     final playerRect = gameRef.player.toRect();
     final boosterRect = toRect().inflate(bufferZone);
 
-    if (playerRect.overlaps(boosterRect)) boost();
+    if (playerRect.overlaps(boosterRect) && !gameRef.player.isDead) boost();
   }
 
   void boost() {
-    gameRef.boosterManager.removeBooster(this.id);
+    gameRef.boosterManager.removeBooster(id);
     gameRef.boosterManager.shieldAnimation = shieldAnimation;
     gameRef.player.hasShield = true;
+    shieldAnimation.position = gameRef.player.position;
     gameRef.add(shieldAnimation);
     gameRef.gameSpeed = SpeedMode.boost;
     gameRef.parallaxComponent.updateSpeed(SpeedMode.boost);

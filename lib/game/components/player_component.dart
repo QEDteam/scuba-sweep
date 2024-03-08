@@ -14,6 +14,7 @@ class PlayerComponent extends SpriteAnimationComponent
   late final SpriteAnimation _goRightAnimation;
 
   bool hasShield = false;
+  bool isDead = false;
 
   Direction direction = Direction.none;
   bool _isDragged = false;
@@ -28,6 +29,10 @@ class PlayerComponent extends SpriteAnimationComponent
   Future<void> onLoad() async {
     super.onLoad();
     await _loadAnimations().then((_) => {animation = _initialAnimation});
+    setToInitialPosition();
+  }
+
+  setToInitialPosition() {
     position = Vector2(gameRef.size.x / 2, gameRef.size.y - 100);
   }
 
