@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +18,7 @@ class EnvMessageOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    int imageNumber = Random().nextInt(6) + 1;
     final state = ref.watch(aiMessageNotifierProvider);
     return OverlayFrame(
         child: SizedBox(
@@ -28,6 +31,23 @@ class EnvMessageOverlay extends ConsumerWidget {
             'dive_deeper',
             style: titleTextStyle,
           ).tr(),
+          const SizedBox(height: 20),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: AppColors.white,
+                width: 2,
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/frame_$imageNumber.png',
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 40),
             child: state.isLoading

@@ -24,7 +24,8 @@
             "program": "lib/main_prod.dart",
             "args": [
                 "--flavor",
-                "prod"
+                "prod",
+                "--no-enable-impeller"
             ]
         },
         {
