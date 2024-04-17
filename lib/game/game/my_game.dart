@@ -11,7 +11,6 @@ import 'package:scuba_sweep/game/components/background_component.dart';
 import 'package:scuba_sweep/game/components/booster_manager.dart';
 import 'package:scuba_sweep/game/components/enemy_manager.dart';
 import 'package:scuba_sweep/game/components/player_component.dart';
-import 'package:scuba_sweep/game/components/score_component.dart';
 import 'package:scuba_sweep/game/components/trash_manager.dart';
 import 'package:scuba_sweep/game/game/overlay_widgets/env_message_overlay.dart';
 import 'package:scuba_sweep/game/game/overlay_widgets/game_header.dart';
@@ -28,7 +27,6 @@ class MyGame extends FlameGame {
 
   final PlayerComponent player = PlayerComponent();
 
-  late final ScoreComponent scoreComponent = ScoreComponent(context);
   late final MyParallaxComponent parallaxComponent = MyParallaxComponent();
   late final BackgroundComponent backgroundComponent = BackgroundComponent()
     ..size = size;
@@ -39,7 +37,7 @@ class MyGame extends FlameGame {
   late final Vector2 gameSize;
 
   int level = 0;
-  bool isGameOver = false;
+  GameState gameState = GameState.initial;
 
   @override
   Future<void> onLoad() async {
@@ -52,7 +50,8 @@ class MyGame extends FlameGame {
   @override
   pauseEngine() {
     super.pauseEngine();
-    if (!isGameOver) {
+    if (gameState == GameState.playing) {
+      gameState = GameState.paused;
       overlays.remove(GameHeader.id);
       overlays.add(PauseMenu.id);
       boosterManager.timer.cancel();
@@ -64,7 +63,8 @@ class MyGame extends FlameGame {
   @override
   resumeEngine() {
     super.resumeEngine();
-    if (!isGameOver) {
+    if (gameState == GameState.paused) {
+      gameState = GameState.playing;
       overlays.remove(PauseMenu.id);
       overlays.add(GameHeader.id);
       boosterManager.start();
@@ -74,12 +74,11 @@ class MyGame extends FlameGame {
   }
 
   void startGame() async {
+    gameState = GameState.playing;
     level = 1;
-    scoreComponent.reset();
     ref.read(scoreNotifierProvider.notifier).getHighScore();
     add(player);
     overlays.add(GameHeader.id);
-    add(scoreComponent);
     player.startMovingUp();
     add(enemyManager);
     enemyManager.start();
@@ -123,16 +122,16 @@ class MyGame extends FlameGame {
   }
 
   void gameOver() async {
-    isGameOver = true;
+    gameState = GameState.gameOver;
     pauseEngine();
-    ref.read(scoreNotifierProvider.notifier).loadScores(scoreComponent.score);
+    ref.read(scoreNotifierProvider.notifier).loadScores();
     overlays.remove(GameHeader.id);
     overlays.add(EnvMessageOverlay.id);
     reset();
   }
 
   void reset() {
-    isGameOver = false;
+    gameState = GameState.initial;
     trashManager.reset();
     boosterManager.reset();
     enemyManager.reset();
@@ -142,6 +141,13 @@ class MyGame extends FlameGame {
     player.isDead = false;
     player.setToInitialPosition();
     remove(player);
+    ref.read(scoreNotifierProvider.notifier).resetScore();
+  }
+
+  void encreaseScore() {
+    if (ref.read(scoreNotifierProvider.notifier).encreaseScore()) {
+      levelUp();
+    }
   }
 
   Future<void> addEffect(

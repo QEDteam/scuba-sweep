@@ -1,3 +1,10 @@
+enum GameState {
+  initial,
+  playing,
+  gameOver,
+  paused,
+}
+
 
 enum AnimationEffect {
   splash(

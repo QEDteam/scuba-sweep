@@ -36,7 +36,7 @@ class TrashComponent extends SpriteComponent with HasGameRef<MyGame> {
         size: Vector2.all(150),
       );
       gameRef.remove(trashComponents[index]);
-      gameRef.scoreComponent.incrementScore();
+      gameRef.encreaseScore();
     }
   }
 }
