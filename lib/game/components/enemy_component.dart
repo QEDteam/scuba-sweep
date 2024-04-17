@@ -42,13 +42,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   }
 
   setPosition() {
-    switch (enemy) {
-      case Enemy.jellyfish:
-        position = Vector2(positionX, gameRef.size.y);
-        break;
-      default:
-        position = Vector2(positionX, 0);
-    }
+    position = Vector2(positionX, 0);
   }
 
   setSize() {
@@ -66,7 +60,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
 
   moveEnemy(double dt) async {
     if (enemy == Enemy.jellyfish) {
-      position.y -= gameRef.gameSpeed.speed * dt * 0.7;
+      position.y += gameRef.gameSpeed.speed * dt;
     } else {
       position.y += gameRef.gameSpeed.speed * dt;
     }
