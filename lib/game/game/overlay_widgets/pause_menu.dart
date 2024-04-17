@@ -31,7 +31,7 @@ class PauseMenu extends ConsumerWidget {
             ActionButton(
               title: 'resume',
               onPressed: () {
-                game.resumeGame();
+                game.resumeEngine();
               },
             ),
             const SizedBox(height: 20),

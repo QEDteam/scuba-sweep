@@ -39,6 +39,7 @@ class MyGame extends FlameGame {
   late final Vector2 gameSize;
 
   int level = 0;
+  bool isGameOver = false;
 
   @override
   Future<void> onLoad() async {
@@ -48,22 +49,28 @@ class MyGame extends FlameGame {
     add(parallaxComponent);
   }
 
-  pauseGame() {
-    pauseEngine();
-    overlays.remove(GameHeader.id);
-    overlays.add(PauseMenu.id);
-    boosterManager.timer.cancel();
-    trashManager.timer.cancel();
-    enemyManager.timer.cancel();
+  @override
+  pauseEngine() {
+    super.pauseEngine();
+    if (!isGameOver) {
+      overlays.remove(GameHeader.id);
+      overlays.add(PauseMenu.id);
+      boosterManager.timer.cancel();
+      trashManager.timer.cancel();
+      enemyManager.timer.cancel();
+    }
   }
 
-  resumeGame() {
-    resumeEngine();
-    overlays.remove(PauseMenu.id);
-    overlays.add(GameHeader.id);
-    boosterManager.start();
-    trashManager.start();
-    enemyManager.start();
+  @override
+  resumeEngine() {
+    super.resumeEngine();
+    if (!isGameOver) {
+      overlays.remove(PauseMenu.id);
+      overlays.add(GameHeader.id);
+      boosterManager.start();
+      trashManager.start();
+      enemyManager.start();
+    }
   }
 
   void startGame() async {
@@ -116,6 +123,7 @@ class MyGame extends FlameGame {
   }
 
   void gameOver() async {
+    isGameOver = true;
     pauseEngine();
     ref.read(scoreNotifierProvider.notifier).loadScores(scoreComponent.score);
     overlays.remove(GameHeader.id);
@@ -124,6 +132,7 @@ class MyGame extends FlameGame {
   }
 
   void reset() {
+    isGameOver = false;
     trashManager.reset();
     boosterManager.reset();
     enemyManager.reset();
