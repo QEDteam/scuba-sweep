@@ -127,7 +127,6 @@ class MyGame extends FlameGame {
     ref.read(scoreNotifierProvider.notifier).loadScores();
     overlays.remove(GameHeader.id);
     overlays.add(EnvMessageOverlay.id);
-    reset();
   }
 
   void reset() {
