@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
@@ -115,9 +117,8 @@ class PlayerComponent extends SpriteAnimationComponent
       stepTime: _animationSpeed,
       to: 8,
     );
-
-    _loadShieldAnimation();
   }
 
-  Future<void> _loadShieldAnimation() async {}
+  Rect getPlayerRect() => Rect.fromCircle(
+      center: Offset(position.x, position.y - 10), radius: size.x * 0.2);
 }

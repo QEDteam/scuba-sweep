@@ -45,26 +45,32 @@ class _BoosterProgressOverlayState extends ConsumerState<BoosterProgressOverlay>
     }
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 50),
+      padding: const EdgeInsets.only(top: 100, right: 18),
       child: Align(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.topRight,
         child: AnimatedBuilder(
           animation: _animation,
           builder: (context, child) {
             return Container(
-              width: 100,
+              height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.white, width: 2),
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: LinearProgressIndicator(
-                  minHeight: 20,
-                  value: _animation.value,
-                  backgroundColor: Color.fromARGB(255, 62, 74, 128),
-                  valueColor: const AlwaysStoppedAnimation<Color>(
-                      Color.fromARGB(255, 92, 182, 255)),
+                child: RotatedBox(
+                  quarterTurns: 3,
+                  child: LinearProgressIndicator(
+                    minHeight: 20,
+                    value: _animation.value,
+                    backgroundColor:
+                        const Color.fromARGB(255, 62, 74, 128).withAlpha(80),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        _animation.value < 0.2
+                            ? Colors.red
+                            : const Color.fromARGB(255, 92, 182, 255)),
+                  ),
                 ),
               ),
             );

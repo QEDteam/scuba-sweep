@@ -23,7 +23,7 @@ class _GameHeaderState extends ConsumerState<GameHeader>
     super.initState();
     _controller = AnimationController(
       lowerBound: 18,
-      upperBound: 28,
+      upperBound: 30,
       vsync: this,
       duration: const Duration(
         milliseconds: 300,
@@ -55,7 +55,7 @@ class _GameHeaderState extends ConsumerState<GameHeader>
     final currentScore = ref.watch(scoreNotifierProvider).score;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10.0),
       child: Align(
         alignment: Alignment.topCenter,
         child: Row(

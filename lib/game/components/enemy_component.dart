@@ -26,6 +26,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
     super.onLoad();
     setPosition();
     setSize();
+    anchor = Anchor.center;
   }
 
   @override
@@ -37,17 +38,30 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
     moveEnemy(dt);
     if (enemy == Enemy.pufferfish) resize();
 
-    final playerPosition = gameRef.player.position;
-    final playerRect = Rect.fromCircle(
-        center: Offset(playerPosition.x, playerPosition.y),
-        radius: (gameRef.player.size.x / 2) - 20);
-    final enemyRect = Rect.fromCircle(
-        center: Offset(position.x, position.y),
-        radius: (size.y / 2) - (enemy == Enemy.pufferfish ? 50 : 20));
-
-    if (!gameRef.player.hasShield && playerRect.overlaps(enemyRect)) {
+    final playerRect = gameRef.player.getPlayerRect();
+    if (!gameRef.player.hasShield && playerRect.overlaps(enemyRect())) {
       _isDead = true;
       gameRef.sharkAttack(id);
+    }
+  }
+
+  Rect enemyRect() {
+    switch (enemy) {
+      case Enemy.jellyfish:
+        return Rect.fromCircle(
+            center: Offset(position.x, position.y - 10), radius: size.x * 0.45);
+      case Enemy.shark:
+        return Rect.fromLTRB(
+            position.x - size.x * 0.3,
+            position.y - size.y * 0.14,
+            position.x + size.x * 0.41,
+            position.y + size.y * 0.25);
+      case Enemy.pufferfish:
+        return Rect.fromCircle(
+            center: Offset(position.x - size.x * 0.04, position.y),
+            radius: size.x * 0.35);
+      default:
+        return Rect.fromLTWH(position.x, position.y, size.x, size.y);
     }
   }
 
@@ -61,7 +75,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
         size = Vector2(220, 130);
         break;
       case Enemy.jellyfish:
-        size = Vector2(80, 120);
+        size = Vector2(100, 120);
         break;
       default:
         size = Vector2.all(100);
