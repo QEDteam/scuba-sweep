@@ -47,7 +47,9 @@ class BoosterComponent extends SpriteAnimationComponent
     gameRef.player.hasShield = true;
     shieldAnimation.position = gameRef.player.position;
     gameRef.add(shieldAnimation);
-    gameRef.gameSpeed = SpeedMode.boost;
+    if (gameRef.gameSpeed.speed < SpeedMode.boost.speed) {
+      gameRef.gameSpeed = SpeedMode.boost;
+    }
     gameRef.parallaxComponent.updateSpeed(SpeedMode.boost);
     gameRef.overlays.add(BoosterProgressOverlay.id);
   }
