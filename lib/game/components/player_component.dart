@@ -53,7 +53,7 @@ class PlayerComponent extends SpriteAnimationComponent
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
-    if (_isDragged) {
+    if (_isDragged && !isDead) {
       final delta = event.localDelta.x;
       position.x += delta;
       gameRef.boosterManager.shieldAnimation?.position = position;

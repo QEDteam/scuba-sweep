@@ -116,8 +116,8 @@ class MyGame extends FlameGame {
       addEffect(
           effect: AnimationEffect.crash,
           position: enemies[index].position,
-          size: Vector2.all(200));
-      remove(enemies[index]);
+          size: Vector2.all(250));
+      //remove(enemies[index]);
       player.isDead = true;
       Future.delayed(const Duration(milliseconds: 600), () {
         gameOver();

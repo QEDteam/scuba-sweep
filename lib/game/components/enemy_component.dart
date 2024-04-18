@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:scuba_sweep/game/game/my_game.dart';
 import 'package:scuba_sweep/game/helper/enums.dart';
 
@@ -6,6 +7,8 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   final String id;
   final double positionX;
   final Enemy enemy;
+
+  bool _isDead = false;
 
   EnemyComponent({
     required this.id,
@@ -28,15 +31,22 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   @override
   void update(double dt) {
     super.update(dt);
+    if (_isDead) {
+      return;
+    }
     moveEnemy(dt);
     if (enemy == Enemy.pufferfish) resize();
 
-    final bufferZone = -size.x * 0.2;
-
-    final playerRect = gameRef.player.toRect();
-    final enemyRect = toRect().inflate(bufferZone);
+    final playerPosition = gameRef.player.position;
+    final playerRect = Rect.fromCircle(
+        center: Offset(playerPosition.x, playerPosition.y),
+        radius: (gameRef.player.size.x / 2) - 20);
+    final enemyRect = Rect.fromCircle(
+        center: Offset(position.x, position.y),
+        radius: (size.y / 2) - (enemy == Enemy.pufferfish ? 50 : 20));
 
     if (!gameRef.player.hasShield && playerRect.overlaps(enemyRect)) {
+      _isDead = true;
       gameRef.sharkAttack(id);
     }
   }
