@@ -14,12 +14,15 @@ class PlayerComponent extends SpriteAnimationComponent
   late final SpriteAnimation _initialAnimation;
   late final SpriteAnimation _goLeftAnimation;
   late final SpriteAnimation _goRightAnimation;
+  late final SpriteAnimation _rightTransitionAnimation;
+  late final SpriteAnimation _leftTransitionAnimation;
 
   bool hasShield = false;
   bool isDead = false;
 
   Direction direction = Direction.none;
   bool _isDragged = false;
+  bool _isTransitioning = false;
 
   PlayerComponent()
       : super(
@@ -60,17 +63,50 @@ class PlayerComponent extends SpriteAnimationComponent
       position.x += delta;
       gameRef.boosterManager.shieldAnimation?.position = position;
 
-      if (delta > 1) {
-        direction = Direction.right;
-      } else if (delta < -1) {
-        direction = Direction.left;
+      Direction newDirection;
+
+      if (delta > 2) {
+        newDirection = Direction.right;
+      } else if (delta < -2) {
+        newDirection = Direction.left;
       } else {
-        direction = Direction.none;
+        newDirection = Direction.none;
       }
 
-      _updateAnimation();
+      if (direction != newDirection) {
+        manageTransition(newDirection);
+      }
     }
     super.onDragUpdate(event);
+  }
+
+  void manageTransition(Direction newDirection) {
+    if (_isTransitioning) {
+      return;
+    }
+    _isTransitioning = true;
+    animation = _rightTransitionAnimation;
+
+    if (direction == Direction.none && newDirection == Direction.right) {
+      animation = _rightTransitionAnimation;
+    } else if (direction == Direction.right && newDirection == Direction.none) {
+      animation = _rightTransitionAnimation.reversed();
+    } else if (direction == Direction.none && newDirection == Direction.left) {
+      animation = _leftTransitionAnimation;
+    } else if (direction == Direction.left && newDirection == Direction.none) {
+      animation = _leftTransitionAnimation.reversed();
+    } else {
+      _isTransitioning = false;
+      direction = newDirection;
+      _updateAnimation();
+      return;
+    }
+
+    direction = newDirection;
+    Future.delayed(const Duration(milliseconds: 130), () {
+      _isTransitioning = false;
+      _updateAnimation();
+    });
   }
 
   @override
@@ -117,6 +153,21 @@ class PlayerComponent extends SpriteAnimationComponent
       stepTime: _animationSpeed,
       to: 8,
     );
+
+    final transitionSpriteSheet = SpriteSheet(
+      image: await gameRef.images.load('tr_right.png'),
+      srcSize: Vector2(384, 384),
+    );
+
+    _rightTransitionAnimation = transitionSpriteSheet.createAnimation(
+        row: 0, stepTime: _animationSpeed / 6, to: 16, loop: false);
+
+    final leftTransitionSpriteSheet = SpriteSheet(
+        image: await gameRef.images.load('tr_left.png'),
+        srcSize: Vector2(384, 384));
+
+    _leftTransitionAnimation = leftTransitionSpriteSheet.createAnimation(
+        row: 0, stepTime: _animationSpeed / 6, to: 16, loop: false);
   }
 
   Rect getPlayerRect() => Rect.fromCircle(
