@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/game/overlay_widgets/booster_progress_overlay.dart';
 import 'package:scuba_sweep/game/game/overlay_widgets/env_message_overlay.dart';
 import 'package:scuba_sweep/game/game/overlay_widgets/game_header.dart';
 import 'package:scuba_sweep/game/game/overlay_widgets/game_over_menu.dart';
@@ -31,6 +32,7 @@ class GamePage extends ConsumerWidget {
         EnvMessageOverlay.id: (_, MyGame game) => EnvMessageOverlay(game),
         LeaderBoardOverlay.id: (_, MyGame game) => LeaderBoardOverlay(game),
         InstructionsOverlay.id: (_, MyGame game) => InstructionsOverlay(game),
+        BoosterProgressOverlay.id: (_, MyGame game) => BoosterProgressOverlay(game),
       },
       initialActiveOverlays: const [MainMenu.id],
     );
