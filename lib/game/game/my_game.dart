@@ -119,13 +119,20 @@ class MyGame extends FlameGame {
       audioManager.play('crash.wav');
       addEffect(
           effect: AnimationEffect.crash,
-          position: enemies[index].position,
+          position: crashPosition(enemies[index].position),
           size: Vector2.all(250));
       player.isDead = true;
       Future.delayed(const Duration(milliseconds: 600), () {
         gameOver();
       });
     }
+  }
+
+  Vector2 crashPosition(Vector2 enemyPosition) {
+    final playerPosition = player.position;
+    final x = playerPosition.x + (enemyPosition.x - playerPosition.x) / 2;
+    final y = playerPosition.y + (enemyPosition.y - playerPosition.y) / 2;
+    return Vector2(x, y);
   }
 
   void gameOver() async {
