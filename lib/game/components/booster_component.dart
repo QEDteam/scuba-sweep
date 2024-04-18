@@ -41,6 +41,7 @@ class BoosterComponent extends SpriteAnimationComponent
   }
 
   void boost() {
+    gameRef.audioManager.play('boost.wav');
     gameRef.boosterManager.removeBooster(id);
     gameRef.boosterManager.shieldAnimation = shieldAnimation;
     gameRef.player.hasShield = true;

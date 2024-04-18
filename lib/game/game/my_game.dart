@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scuba_sweep/data/providers/message_provider.dart';
 import 'package:scuba_sweep/data/providers/score_provider.dart';
+import 'package:scuba_sweep/game/components/audio_manager.dart';
 import 'package:scuba_sweep/game/components/background_component.dart';
 import 'package:scuba_sweep/game/components/booster_manager.dart';
 import 'package:scuba_sweep/game/components/enemy_manager.dart';
@@ -33,6 +34,7 @@ class MyGame extends FlameGame {
   final BoosterManager boosterManager = BoosterManager();
   final TrashManager trashManager = TrashManager();
   final EnemyManager enemyManager = EnemyManager();
+  final AudioManager audioManager = AudioManager();
 
   late final Vector2 gameSize;
 
@@ -45,6 +47,7 @@ class MyGame extends FlameGame {
     gameSize = size;
     add(backgroundComponent);
     add(parallaxComponent);
+    add(audioManager);
   }
 
   @override
@@ -109,6 +112,7 @@ class MyGame extends FlameGame {
     final enemies = enemyManager.enemyComponents;
     final index = enemies.indexWhere((element) => element.id == componentId);
     if (index != -1) {
+      audioManager.play('crash.wav');
       addEffect(
           effect: AnimationEffect.crash,
           position: enemies[index].position,
