@@ -6,6 +6,7 @@ import 'package:scuba_sweep/game/game/overlay_widgets/instructions_overlay.dart'
 import 'package:scuba_sweep/game/helper/colors.dart';
 import 'package:scuba_sweep/screens/widgets/action_button.dart';
 import 'package:scuba_sweep/screens/widgets/logout_button.dart';
+import 'package:scuba_sweep/screens/widgets/sound_toggle.dart';
 
 class MainMenu extends ConsumerWidget {
   static const id = 'MainMenu';
@@ -69,6 +70,10 @@ class MainMenu extends ConsumerWidget {
                 ),
                 const SizedBox(height: 30),
                 const LogoutButton(),
+                const SizedBox(
+                  height: 40,
+                ),
+                SoundToggle(game)
               ],
             ),
           ),

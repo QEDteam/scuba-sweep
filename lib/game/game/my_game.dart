@@ -54,6 +54,7 @@ class MyGame extends FlameGame {
   pauseEngine() {
     super.pauseEngine();
     if (gameState == GameState.playing) {
+      audioManager.stopBgmMusic();
       gameState = GameState.paused;
       overlays.remove(GameHeader.id);
       overlays.add(PauseMenu.id);
@@ -67,6 +68,7 @@ class MyGame extends FlameGame {
   resumeEngine() {
     super.resumeEngine();
     if (gameState == GameState.paused) {
+      audioManager.playBgmMusic();
       gameState = GameState.playing;
       overlays.remove(PauseMenu.id);
       overlays.add(GameHeader.id);
@@ -77,6 +79,7 @@ class MyGame extends FlameGame {
   }
 
   void startGame() async {
+    audioManager.playBgmMusic();
     gameState = GameState.playing;
     level = 1;
     ref.read(scoreNotifierProvider.notifier).getHighScore();
@@ -112,12 +115,12 @@ class MyGame extends FlameGame {
     final enemies = enemyManager.enemyComponents;
     final index = enemies.indexWhere((element) => element.id == componentId);
     if (index != -1) {
+      audioManager.stopBgmMusic();
       audioManager.play('crash.wav');
       addEffect(
           effect: AnimationEffect.crash,
           position: enemies[index].position,
           size: Vector2.all(250));
-      //remove(enemies[index]);
       player.isDead = true;
       Future.delayed(const Duration(milliseconds: 600), () {
         gameOver();

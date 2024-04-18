@@ -15,9 +15,10 @@ class AudioManager extends Component with HasGameRef<MyGame> {
       'boost.wav',
       'collect.wav',
       'crash.wav',
+      'music.mp3',
     ]);
 
-    //FlameAudio.bgm.initialize();
+    FlameAudio.bgm.initialize();
   }
 
   bool audioOn = true;
@@ -30,17 +31,18 @@ class AudioManager extends Component with HasGameRef<MyGame> {
 
   void toggleAudio() {
     audioOn = !audioOn;
-    switch (audioOn) {
-      case true:
-        playBgmMusic();
-      case false:
-        FlameAudio.bgm.stop();
+    if (!audioOn) {
+      FlameAudio.bgm.stop();
     }
   }
 
   void playBgmMusic() {
     if (audioOn) {
-      FlameAudio.bgm.play('bgm.mp3');
+      FlameAudio.bgm.play('music.mp3');
     }
+  }
+
+  void stopBgmMusic() {
+    FlameAudio.bgm.stop();
   }
 }
