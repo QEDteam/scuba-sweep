@@ -62,6 +62,7 @@ dependencies:
   flutter_svg: ^1.1.6
   add_to_google_wallet: ^0.0.3
   envied: ^0.5.3
+  flame_audio: ^2.1.8
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,7 @@ flutter:
     - assets/translations/
     - assets/launcher_icons/
     - assets/images/
+    - assets/audio/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

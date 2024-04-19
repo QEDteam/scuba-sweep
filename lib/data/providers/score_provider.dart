@@ -37,8 +37,8 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
       state = state.copyWith(isLoading: true);
       try {
         await _gameRepository.getNickname().then((value) {
-        state = state.copyWith(nickname: value, isLoading: false);
-      });
+          state = state.copyWith(nickname: value, isLoading: false);
+        });
       } catch (e) {
         return Future.error(e);
       }
@@ -60,8 +60,8 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
     }
   }
 
-  Future<void> loadScores(int currentScore) async {
-    state = state.copyWith(score: currentScore);
+  Future<void> loadScores() async {
+    final currentScore = state.score;
     if (currentScore > state.highScore) {
       await saveHighScore(currentScore);
     }
@@ -103,6 +103,15 @@ class ScoreNotifier extends StateNotifier<ScoreState> {
     } catch (e) {
       return Future.error(e);
     }
+  }
+
+  resetScore() {
+    state = state.copyWith(score: 0);
+  }
+
+  bool encreaseScore() {
+    state = state.copyWith(score: state.score + 1);
+    return state.score % 10 == 0;
   }
 }
 

@@ -49,23 +49,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              "assets/images/logo.png",
-              width: 300,
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            const SizedBox(
-              width: 300,
-              child: LinearProgressIndicator(
-                color: Colors.white,
-              ),
-            ),
-          ],
+        child: Image.asset(
+          "assets/images/logo.png",
+          width: 300,
         ),
       ),
     );

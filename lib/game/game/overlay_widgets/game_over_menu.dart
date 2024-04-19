@@ -59,6 +59,7 @@ class GameOverMenu extends ConsumerWidget {
           ActionButton(
             title: 'play_again',
             onPressed: () {
+              game.reset();
               game.overlays.remove(GameOverMenu.id);
               game.resumeEngine();
               game.startGame();

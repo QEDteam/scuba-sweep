@@ -6,6 +6,7 @@ import 'package:scuba_sweep/game/game/overlay_widgets/overlay_frame.dart';
 import 'package:scuba_sweep/game/helper/styles.dart';
 import 'package:scuba_sweep/screens/widgets/action_button.dart';
 import 'package:scuba_sweep/screens/widgets/logout_button.dart';
+import 'package:scuba_sweep/screens/widgets/sound_toggle.dart';
 
 class PauseMenu extends ConsumerWidget {
   static const id = 'PauseMenu';
@@ -28,10 +29,15 @@ class PauseMenu extends ConsumerWidget {
             const SizedBox(
               height: 60,
             ),
+            SoundToggle(game
+            ),
+            const SizedBox(
+              height: 60,
+            ),
             ActionButton(
               title: 'resume',
               onPressed: () {
-                game.resumeGame();
+                game.resumeEngine();
               },
             ),
             const SizedBox(height: 20),

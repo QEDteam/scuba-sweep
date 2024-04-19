@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:flame/components.dart';
 import 'package:scuba_sweep/game/components/booster_component.dart';
 import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/game/overlay_widgets/booster_progress_overlay.dart';
 import 'package:uuid/uuid.dart';
 
 class BoosterManager extends Component with HasGameRef<MyGame> {
@@ -23,6 +24,7 @@ class BoosterManager extends Component with HasGameRef<MyGame> {
       if (shieldAnimation!.isRemoved) {
         gameRef.updateSpeed();
         gameRef.player.hasShield = false;
+        gameRef.overlays.remove(BoosterProgressOverlay.id);
       }
     } catch (_) {}
   }
