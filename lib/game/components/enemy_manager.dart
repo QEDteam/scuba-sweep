@@ -26,7 +26,7 @@ class EnemyManager extends Component with HasGameRef<MyGame> {
   }
 
   start() {
-    timer = da.Timer.periodic(const Duration(seconds: 2), (_) => addEnemy());
+    timer = da.Timer.periodic(const Duration(milliseconds: 2300), (_) => addEnemy());
   }
 
   addEnemy() async {

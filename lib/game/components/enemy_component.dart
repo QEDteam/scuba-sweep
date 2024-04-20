@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:scuba_sweep/game/game/my_game.dart';
 import 'package:scuba_sweep/game/helper/enums.dart';
 
@@ -6,6 +7,8 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
   final String id;
   final double positionX;
   final Enemy enemy;
+
+  bool _isDead = false;
 
   EnemyComponent({
     required this.id,
@@ -23,32 +26,47 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
     super.onLoad();
     setPosition();
     setSize();
+    anchor = Anchor.center;
   }
 
   @override
   void update(double dt) {
     super.update(dt);
+    if (_isDead) {
+      return;
+    }
     moveEnemy(dt);
     if (enemy == Enemy.pufferfish) resize();
 
-    final bufferZone = -size.x * 0.2;
-
-    final playerRect = gameRef.player.toRect();
-    final enemyRect = toRect().inflate(bufferZone);
-
-    if (!gameRef.player.hasShield && playerRect.overlaps(enemyRect)) {
+    final playerRect = gameRef.player.getPlayerRect();
+    if (!gameRef.player.hasShield && playerRect.overlaps(enemyRect())) {
+      _isDead = true;
       gameRef.sharkAttack(id);
     }
   }
 
-  setPosition() {
+  Rect enemyRect() {
     switch (enemy) {
       case Enemy.jellyfish:
-        position = Vector2(positionX, gameRef.size.y);
-        break;
+        return Rect.fromCircle(
+            center: Offset(position.x, position.y - 10), radius: size.x * 0.45);
+      case Enemy.shark:
+        return Rect.fromLTRB(
+            position.x - size.x * 0.3,
+            position.y - size.y * 0.14,
+            position.x + size.x * 0.41,
+            position.y + size.y * 0.25);
+      case Enemy.pufferfish:
+        return Rect.fromCircle(
+            center: Offset(position.x - size.x * 0.04, position.y),
+            radius: size.x * 0.35);
       default:
-        position = Vector2(positionX, 0);
+        return Rect.fromLTWH(position.x, position.y, size.x, size.y);
     }
+  }
+
+  setPosition() {
+    position = Vector2(positionX, 0);
   }
 
   setSize() {
@@ -57,7 +75,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
         size = Vector2(220, 130);
         break;
       case Enemy.jellyfish:
-        size = Vector2(80, 120);
+        size = Vector2(100, 120);
         break;
       default:
         size = Vector2.all(100);
@@ -66,7 +84,7 @@ class EnemyComponent extends SpriteComponent with HasGameRef<MyGame> {
 
   moveEnemy(double dt) async {
     if (enemy == Enemy.jellyfish) {
-      position.y -= gameRef.gameSpeed.speed * dt * 0.7;
+      position.y += gameRef.gameSpeed.speed * dt;
     } else {
       position.y += gameRef.gameSpeed.speed * dt;
     }

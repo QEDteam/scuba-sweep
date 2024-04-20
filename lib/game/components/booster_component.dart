@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:scuba_sweep/game/game/my_game.dart';
+import 'package:scuba_sweep/game/game/overlay_widgets/booster_progress_overlay.dart';
 import 'package:scuba_sweep/game/helper/enums.dart';
 
 class BoosterComponent extends SpriteAnimationComponent
@@ -40,13 +41,17 @@ class BoosterComponent extends SpriteAnimationComponent
   }
 
   void boost() {
+    gameRef.audioManager.play('boost.wav');
     gameRef.boosterManager.removeBooster(id);
     gameRef.boosterManager.shieldAnimation = shieldAnimation;
     gameRef.player.hasShield = true;
     shieldAnimation.position = gameRef.player.position;
     gameRef.add(shieldAnimation);
-    gameRef.gameSpeed = SpeedMode.boost;
+    if (gameRef.gameSpeed.speed < SpeedMode.boost.speed) {
+      gameRef.gameSpeed = SpeedMode.boost;
+    }
     gameRef.parallaxComponent.updateSpeed(SpeedMode.boost);
+    gameRef.overlays.add(BoosterProgressOverlay.id);
   }
 
   void _loadAnimation() async {

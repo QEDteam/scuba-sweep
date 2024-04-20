@@ -30,13 +30,14 @@ class TrashComponent extends SpriteComponent with HasGameRef<MyGame> {
     final index =
         trashComponents.indexWhere((element) => element.id == componentId);
     if (index != -1) {
+      gameRef.audioManager.play('collect.wav');
       gameRef.addEffect(
         position: trashComponents[index].position,
         effect: AnimationEffect.splash,
         size: Vector2.all(150),
       );
       gameRef.remove(trashComponents[index]);
-      gameRef.scoreComponent.incrementScore();
+      gameRef.encreaseScore();
     }
   }
 }

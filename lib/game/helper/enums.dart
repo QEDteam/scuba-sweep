@@ -1,3 +1,10 @@
+enum GameState {
+  initial,
+  playing,
+  gameOver,
+  paused,
+}
+
 
 enum AnimationEffect {
   splash(
@@ -40,11 +47,13 @@ enum AnimationEffect {
 
 enum SpeedMode {
   slow(speed: 150),
-  normal(speed: 250),
-  fast(speed: 300),
-  superFast(speed: 400),
-  turbo(speed: 500),
+  speed1(speed: 250),
+  speed2(speed: 300),
+  speed3(speed: 400),
+  speed4(speed: 500),
   boost(speed: 700),
+  speed5(speed: 750),
+  speed6(speed: 800),
   ;
 
   final double speed;

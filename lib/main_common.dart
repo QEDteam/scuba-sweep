@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:dart_openai/dart_openai.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:scuba_sweep/data/providers/auth_provider.dart';
 import 'package:scuba_sweep/data/providers/theme_provider.dart';
-import 'package:scuba_sweep/services/push_notif_service.dart';
 import 'package:scuba_sweep/utilities/router.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:scuba_sweep/utilities/theme.dart';
